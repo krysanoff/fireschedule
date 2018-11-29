@@ -1,1 +1,1 @@
-# fireschedule
+# Specially for firefighter of Tarko-Sale
