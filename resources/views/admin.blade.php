@@ -9,7 +9,7 @@
 
                 <div class="card-body"></div>
                 <div class="card-footer">
-                    <a href="{{ route('addEmployee') }}" class="btn btn-success">Добавить сотрудника</a>
+                    <a href="{{ route('newEmployee') }}" class="btn btn-success">Добавить сотрудника</a>
                 </div>
             </div>
         </div>

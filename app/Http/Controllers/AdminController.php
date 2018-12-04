@@ -26,6 +26,11 @@ class AdminController extends Controller
         return view('admin');
     }
 
+    public function newEmployee()
+    {
+        return view('welcome');
+    }
+
     public function getEmployee($id)
     {
 

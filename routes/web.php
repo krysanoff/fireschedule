@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::prefix('admin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/employee/new', 'AdminController@newEmployee')->name('newEmployee');
     Route::get('/employee/{id}', 'AdminController@getEmployee')->name('employee');
 
     Route::post('/employee/add', 'AdminController@addEmployee')->name('addEmployee');
