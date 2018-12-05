@@ -2,6 +2,10 @@
 
 namespace App\Forms;
 
+use App\Post;
+use App\Rank;
+use App\Shift;
+use function foo\func;
 use Kris\LaravelFormBuilder\Form;
 
 class AddEmployeeForm extends Form
@@ -30,20 +34,26 @@ class AddEmployeeForm extends Form
                     'lastname.required' => 'Обязательное поле'
                 ]
             ])
-            ->add('post', 'select', [
-                'label' => 'Должность',
-                'rules' => '',
-                'error_messages' => []
+            ->add('post', 'entity', [
+                'class' => 'App\Post',
+                'property' => 'name',
+                'query_builder' => Post::all(),
+                'label' => 'Должность'
             ])
-            ->add('rank', 'select', [
-                'label' => '',
-                'rules' => '',
-                'error_messages' => []
+            ->add('rank', 'entity', [
+                'class' => 'App\Rank',
+                'property' => 'name',
+                'query_builder' => Rank::all(),
+                'label' => 'Звание'
             ])
-            ->add('choice', 'select', [
-                'label' => '',
-                'rules' => '',
-                'error_messages' => []
+            ->add('shift', 'entity', [
+                'class' => 'App\Shift',
+                'property' => 'shift_number',
+                'query_builder' => Shift::all(),
+                'label' => 'Караул'
+            ])
+            ->add('submit', 'submit', [
+                'label' => 'Добавить',
             ]);
     }
 }

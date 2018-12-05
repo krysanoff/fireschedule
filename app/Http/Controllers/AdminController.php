@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
+use App\Post;
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class AdminController extends Controller
 {
@@ -26,9 +29,13 @@ class AdminController extends Controller
         return view('admin');
     }
 
-    public function newEmployee()
+    public function newEmployee(FormBuilder $formBuilder)
     {
-        return view('welcome');
+        $form = $formBuilder->create('App\Forms\AddEmployeeForm', [
+            'method' => 'POST',
+            'url'    => route('addEmployee'),
+        ]);
+        return view('newEmployee', compact('form'));
     }
 
     public function getEmployee($id)
