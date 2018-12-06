@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Employee;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 class AdminController extends Controller
@@ -54,7 +55,10 @@ class AdminController extends Controller
         $employee->rank_id = $request->rank;
         $employee->shift_id = $request->shift;
 
-        $employee->save();
+        if ($employee->save()) {
+            $request->session()->flash('message',
+                "Добавлен новый сотрудник - {$employee->lastname} {$employee->firstname}");
+        }
         return redirect()->route('admin');
     }
 
