@@ -43,9 +43,19 @@ class AdminController extends Controller
 
     }
 
-    public function addEmployee()
+    public function addEmployee(Request $request)
     {
+        $employee = new Employee();
 
+        $employee->firstname = $request->firstname;
+        $employee->lastname = $request->lastname;
+        $employee->middlename = $request->middlename;
+        $employee->post_id = $request->post;
+        $employee->rank_id = $request->rank;
+        $employee->shift_id = $request->shift;
+
+        $employee->save();
+        return redirect()->route('admin');
     }
 
     public function removeEmployee($id)
