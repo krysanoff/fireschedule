@@ -12,4 +12,9 @@ class Post extends Model
     {
         return $this->hasMany('App\Employee');
     }
+
+    public function graphs()
+    {
+        return $this->hasMany('App\Graph');
+    }
 }
