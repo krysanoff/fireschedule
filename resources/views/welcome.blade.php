@@ -11,6 +11,17 @@
 
     </head>
     <body>
+        <div id="app">
+            <span v-if="seen" v-on:click="reverseSeen">
+                @{{ message }}
+            </span>
+            <form-item
+                v-for="employee in employees"
+                v-bind:employee="employee"
+                v-bind:key="employee.id">
 
+            </form-item>
+        </div>
+        <script src="{{ URL::asset('js/app.js') }}"></script>
     </body>
 </html>

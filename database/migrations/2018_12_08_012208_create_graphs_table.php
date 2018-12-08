@@ -16,7 +16,8 @@ class CreateGraphsTable extends Migration
         Schema::create('graphs', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->text('graph');
+            $table->text('list');
+            $table->char('schema', 10);
             $table->integer('shift_id');
         });
     }
