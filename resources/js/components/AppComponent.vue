@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <form-component v-bind:list="list"></form-component>
-        <graph-component v-bind:list="list"></graph-component>
+    <div class="container">
+        <div class="row">
+            <form-component v-bind:list="list"></form-component>
+            <graph-component v-bind:list="list"></graph-component>
+        </div>
     </div>
 </template>
 
@@ -19,7 +21,7 @@
             }
         },
         mounted() {
-            console.log('app component')
+
         }
     }
 </script>

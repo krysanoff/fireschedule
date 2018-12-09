@@ -13,7 +13,6 @@
     <body>
         <div id="app">
             <app-component v-bind:graph-list="{{ $list }}"></app-component>
-
         </div>
         <script src="{{ URL::asset('js/app.js') }}"></script>
     </body>

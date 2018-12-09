@@ -1,29 +1,24 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <form action="" id="list">
-                    <fieldset v-for="name in list.drivers">
-                        <li>
+            <div class="col-6">
+                <form class="form-group" action="" id="list">
+                    <fieldset>
+                        <li v-for="name in list.drivers">
                             <input type="text" :value="name">
                         </li>
                     </fieldset>
-                    <fieldset v-for="(name, index) in list.firefighters">
-                        <li>
-                            <span>{{ name }}</span>
+                    <fieldset>
+                        <li v-for="(name, index) in list.firefighters">
                             <input type="text" v-model="list.firefighters[index]">
                         </li>
                     </fieldset>
-                    <fieldset v-for="name in list.duties">
-                        <li>
+                    <fieldset>
+                        <li v-for="name in list.duties">
                             <label>{{ name }}</label>
                             <input type="text">
                         </li>
                     </fieldset>
                 </form>
             </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -32,12 +27,10 @@
           'list'
         ],
         mounted() {
-            console.log(this.list)
+
         },
         methods: {
-            getGraph: function () {
-                console.log(this.list)
-            }
+
         }
     }
 </script>
