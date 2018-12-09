@@ -48095,7 +48095,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['list'],
@@ -48119,11 +48118,27 @@ var render = function() {
       [
         _c(
           "fieldset",
-          _vm._l(_vm.list.drivers, function(name) {
+          _vm._l(_vm.list.drivers, function(name, index) {
             return _c("li", [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.list.drivers[index],
+                    expression: "list.drivers[index]"
+                  }
+                ],
                 attrs: { type: "text" },
-                domProps: { value: name }
+                domProps: { value: _vm.list.drivers[index] },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.list.drivers, index, $event.target.value)
+                  }
+                }
               })
             ])
           })
@@ -48159,11 +48174,28 @@ var render = function() {
         _vm._v(" "),
         _c(
           "fieldset",
-          _vm._l(_vm.list.duties, function(name) {
+          _vm._l(_vm.list.duties, function(name, index) {
             return _c("li", [
-              _c("label", [_vm._v(_vm._s(name))]),
-              _vm._v(" "),
-              _c("input", { attrs: { type: "text" } })
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.list.duties[index],
+                    expression: "list.duties[index]"
+                  }
+                ],
+                attrs: { type: "text" },
+                domProps: { value: _vm.list.duties[index] },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.list.duties, index, $event.target.value)
+                  }
+                }
+              })
             ])
           })
         )
