@@ -5,9 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import './bootstrap'
 
-window.Vue = require('vue');
+import Vue from 'vue'
 
 /**
  * The following block of code may be used to automatically register your
@@ -16,8 +16,9 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('app-component', require('./components/AppComponent'))
+Vue.component('form-component', require('./components/FormComponent'))
+Vue.component('graph-component', require('./components/GraphComponent'))
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
@@ -29,5 +30,24 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        message: 'Hello',
+        seen: true,
+        employees: [
+            {
+                id: 1,
+                lastname: 'Brown',
+            },
+            {
+                id: 2,
+                lastname: 'Frog',
+            },
+        ]
+    },
+    methods: {
+        reverseSeen: function () {
+            this.seen ? this.seen = false : this.seen = true
+        }
+    },
 });

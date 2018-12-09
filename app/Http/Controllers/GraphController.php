@@ -9,8 +9,8 @@ use Illuminate\View\View;
 class GraphController extends Controller
 {
     public function getGraph() {
-        $graph = Graph::select('list')->orderBy('created_at', 'desc')->first();
+        $list = Graph::orderBy('created_at', 'desc')->first()->list;
 
-        return view('welcome', compact('graph'));
+        return view('welcome', compact('list'));
     }
 }
