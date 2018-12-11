@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <form-component v-bind:list="list"></form-component>
             <graph-component v-bind:list="list"></graph-component>

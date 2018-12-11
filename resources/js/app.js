@@ -9,6 +9,9 @@ import './bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Vue from 'vue'
+import Icon from 'vue-awesome/components/Icon'
+
+import 'vue-awesome/icons' //TODO change to specific icons to reduce bundle
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +23,7 @@ import Vue from 'vue'
 Vue.component('app-component', require('./components/AppComponent'))
 Vue.component('form-component', require('./components/FormComponent'))
 Vue.component('graph-component', require('./components/GraphComponent'))
+Vue.component('v-icon', Icon)
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
@@ -33,22 +37,9 @@ Vue.component('graph-component', require('./components/GraphComponent'))
 const app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello',
-        seen: true,
-        employees: [
-            {
-                id: 1,
-                lastname: 'Brown',
-            },
-            {
-                id: 2,
-                lastname: 'Frog',
-            },
-        ]
+
     },
     methods: {
-        reverseSeen: function () {
-            this.seen ? this.seen = false : this.seen = true
-        }
+
     },
 });
