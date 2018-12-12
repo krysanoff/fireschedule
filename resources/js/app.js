@@ -40,6 +40,8 @@ const app = new Vue({
 
     },
     methods: {
-
+        handleClick: function () {
+            console.log('click')
+        }
     },
 });

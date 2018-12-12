@@ -14312,7 +14312,11 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.component('v-icon', __WEBPACK_IMPORT
 var app = new __WEBPACK_IMPORTED_MODULE_2_vue___default.a({
   el: '#app',
   data: {},
-  methods: {}
+  methods: {
+    handleClick: function handleClick() {
+      console.log('click');
+    }
+  }
 });
 
 /***/ }),
@@ -68238,12 +68242,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['list'],
-  mounted: function mounted() {},
+    props: ['list'],
+    mounted: function mounted() {},
 
-  methods: {}
+    methods: {
+        up: function up(arr) {
+            var first = arr.shift();
+            console.log(first);
+            return arr.push(first);
+        },
+
+        down: function down(arr) {
+            var last = arr.pop();
+            console.log(last);
+            return arr.unshift(last);
+        },
+
+        add: function add(arr) {
+            return arr.push("");
+        },
+
+        remove: function remove(arr, index) {
+            arr.splice(index, 1);
+            return arr;
+        }
+    }
 });
 
 /***/ }),
@@ -68288,7 +68318,15 @@ var render = function() {
                   _c("div", { staticClass: "input-group-text" }, [
                     _c(
                       "a",
-                      { attrs: { href: "#" } },
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.remove(_vm.list.drivers, index)
+                          }
+                        }
+                      },
                       [_c("v-icon", { attrs: { name: "times" } })],
                       1
                     )
@@ -68296,7 +68334,48 @@ var render = function() {
                 ])
               ])
             })
-          )
+          ),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.up(_vm.list.drivers)
+                  }
+                }
+              },
+              [_c("v-icon", { attrs: { name: "arrow-up" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.down(_vm.list.drivers)
+                  }
+                }
+              },
+              [_c("v-icon", { attrs: { name: "arrow-down" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.add(_vm.list.drivers)
+                  }
+                }
+              },
+              [_c("v-icon", { attrs: { name: "plus" } })],
+              1
+            )
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-6" }, [
