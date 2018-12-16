@@ -68498,6 +68498,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         save: function save() {
+            var _this = this;
+
             var headers = new Headers({
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
                 "Accept": "text/plain",
@@ -68515,9 +68517,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response);
 
                 return response.json();
-            }).then(function (json) {
-                console.log(json);
-                //alert('data was saved successfully')
+            }).then(function (response) {
+                _this.flash = document.querySelector('.flash');
+
+                if (response.completed) {
+                    _this.fade = document.querySelector('.alert-success');
+                } else {
+                    _this.fade = document.querySelector('.alert-danger');
+                }
+
+                _this.fade.classList.remove('invisible');
+                _this.flash.classList.add('is-visible');
+
+                setTimeout(function () {
+                    _this.flash.classList.remove('is-visible').add('invisible');
+                }, 5000);
             }).catch(function (error) {
                 return console.log(error);
             });

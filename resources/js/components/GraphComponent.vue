@@ -45,9 +45,21 @@
                         return response.json()
                     })
                     .then(response => {
-                        console.log(response)
+                        this.flash = document.querySelector('.flash')
 
-                        //TODO flash message about result
+                        if (response.completed) {
+                            this.fade = document.querySelector('.alert-success')
+                        } else {
+                            this.fade = document.querySelector('.alert-danger')
+                        }
+
+                        this.fade.classList.remove('invisible')
+                        this.flash.classList.add('is-visible')
+
+                        setTimeout(() => {
+                            this.flash.classList.remove('is-visible')
+                                .add('invisible')
+                        }, 5000)
                     })
                     .catch(error => console.log(error))
             }
