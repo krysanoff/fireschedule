@@ -25,3 +25,4 @@ Route::prefix('admin')->group(function () {
     Route::post('/employee/update/{id}', 'AdminController@updateEmployee')->name('updateEmployee');
 });
 
+Route::post('/graph/save', 'GraphController@saveGraph');

@@ -68488,12 +68488,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['list'],
-  mounted: function mounted() {},
+    props: ['list'],
+    mounted: function mounted() {},
 
-  methods: {}
+    methods: {
+        save: function save() {
+            var headers = new Headers({
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                "Accept": "text/plain",
+                "Content-Type": "application/json"
+            });
+            fetch('/graph/save', {
+                headers: headers,
+                method: 'POST',
+                body: JSON.stringify({
+                    shift_id: 1,
+                    list: this.list
+                })
+            }).then(function (response) {
+                //window.print()
+                console.log(response);
+
+                return response.json();
+            }).then(function (json) {
+                console.log(json);
+                //alert('data was saved successfully')
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -68524,7 +68553,24 @@ var render = function() {
       _vm._l(_vm.list.duties, function(name) {
         return _c("li", [_vm._v(_vm._s(name))])
       })
-    )
+    ),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success",
+          attrs: { href: "" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.save($event)
+            }
+          }
+        },
+        [_vm._v("Печать")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []

@@ -9,6 +9,9 @@
                 <ul>
                    <li v-for="name in list.duties">{{ name }}</li>
                 </ul>
+                <div>
+                    <a href="" class="btn btn-success" v-on:click.prevent="save">Печать</a>
+                </div>
             </div>
 </template>
 
@@ -21,7 +24,33 @@
 
         },
         methods: {
+            save: function () {
+                let headers = new Headers({
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                    "Accept": "text/plain",
+                    "Content-Type": "application/json"
+                })
+                fetch('/graph/save', {
+                    headers: headers,
+                    method: 'POST',
+                    body: JSON.stringify({
+                        shift_id: 1,
+                        list: this.list
+                    })
+                })
+                    .then(response => {
+                        //window.print()
+                        console.log(response)
 
+                        return response.json()
+                    })
+                    .then(response => {
+                        console.log(response)
+
+                        //TODO flash message about result
+                    })
+                    .catch(error => console.log(error))
+            }
         }
     }
 </script>
