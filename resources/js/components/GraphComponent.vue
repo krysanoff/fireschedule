@@ -1,10 +1,20 @@
 <template>
             <div class="col-md-6">
                 <ul>
-                   <li v-for="name in list.drivers">{{ name }}</li>
+                   <li v-for="name, index in list.drivers">
+                       {{ name }}
+                       <span v-for="time in times.drivers[index]">
+                           {{ time }}
+                       </span>
+                   </li>
                 </ul>
                 <ul>
-                   <li v-for="name in list.firefighters">{{ name }}</li>
+                   <li v-for="name, index in list.firefighters">
+                       {{ name }}
+                       <span v-for="time in times.firefighters[index]">
+                           {{ time }}
+                       </span>
+                   </li>
                 </ul>
                 <ul>
                    <li v-for="name in list.duties">{{ name }}</li>
@@ -20,8 +30,19 @@
         props: [
           'list'
         ],
-        mounted() {
-
+        data() {
+            return {
+                times: {
+                    drivers: [],
+                    firefighters: []
+                }
+            }
+        },
+        created() {
+            this.getDutyTimes()
+        },
+        beforeUpdate() {
+            this.getDutyTimes()
         },
         methods: {
             save: function () {
@@ -45,23 +66,107 @@
                         return response.json()
                     })
                     .then(response => {
-                        this.flash = document.querySelector('.flash')
+                        this.flashSelector = document.querySelector('.flash')
 
                         if (response.completed) {
-                            this.fade = document.querySelector('.alert-success')
+                            this.alertSelector = document.querySelector('.alert-success')
                         } else {
-                            this.fade = document.querySelector('.alert-danger')
+                            this.alertSelector = document.querySelector('.alert-danger')
                         }
 
-                        this.fade.classList.remove('invisible')
-                        this.flash.classList.add('is-visible')
+                        this.alertSelector.classList.remove('invisible')
+                        this.flashSelector.classList.add('is-visible')
 
                         setTimeout(() => {
-                            this.flash.classList.remove('is-visible')
-                                .add('invisible')
+                            this.flashSelector.classList.remove('is-visible')
+                            this.alertSelector.classList.add('invisible')
                         }, 5000)
                     })
                     .catch(error => console.log(error))
+            },
+
+            getDutyTimes: function () {
+                console.log(this.list, this.times)
+                let startDutyTime = new Date()
+                startDutyTime.setHours(8)
+                startDutyTime.setMinutes(30)
+                startDutyTime.setSeconds(0)
+                //const endDutyTime = new Date(startDutyTime.getTime() + 1000*60*60*24)
+                const dayTime = 1000*60*60*24;
+
+                let oneEmployeeTime = dayTime/(this.list.drivers.length + this.list.firefighters.length)
+
+                let allDriversTime = oneEmployeeTime*this.list.drivers.length
+                let usedDriversTime = 0;
+                let allFirefightersTime = oneEmployeeTime*this.list.firefighters.length
+
+                // drivers
+                // first half
+                let driverFirstDutyTime = 1000*60*60*2
+                for (let driver in this.list.drivers) {
+                    this.times.drivers[driver] = []
+                    let start = new Date(startDutyTime.getTime())
+                    let end = new Date(startDutyTime.getTime() + driverFirstDutyTime)
+                    this.times.drivers[driver].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    startDutyTime.setTime(end)
+                    usedDriversTime += driverFirstDutyTime
+                }
+
+                //second half
+                let driversRemainingTime = allDriversTime - usedDriversTime
+                let driverSecondDutyTime = driversRemainingTime/this.list.drivers.length
+
+                for (let driver in this.list.drivers) {
+                    let start = new Date(startDutyTime.getTime())
+                    let end = new Date(startDutyTime.getTime() + driverSecondDutyTime)
+                    this.times.drivers[driver].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    startDutyTime.setTime(end)
+                    usedDriversTime += driverSecondDutyTime
+                }
+
+                // Firefighters
+                // Evening
+                const eveningEnd = new Date()
+                eveningEnd.setHours(22)
+                eveningEnd.setMinutes(0)
+                eveningEnd.setSeconds(0)
+
+                let ffAllEveningTime =eveningEnd.getTime() - startDutyTime.getTime()
+                let ffLength = this.list.firefighters.length
+                let ffEveningTime = ffAllEveningTime/ffLength
+
+                for (let firefighter in this.list.firefighters) {
+                    this.times.firefighters[firefighter] = []
+                    let start = new Date(startDutyTime.getTime())
+                    let end = new Date(startDutyTime.getTime() + ffEveningTime)
+                    this.times.firefighters[firefighter].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    startDutyTime.setTime(end)
+                    usedDriversTime += ffEveningTime
+                }
+
+                // Night
+                let allNightTime = 8*60*60*1000
+                let nightTime = allNightTime/ffLength
+
+                for (let firefighter in this.list.firefighters) {
+                    let start = new Date(startDutyTime.getTime())
+                    let end = new Date(startDutyTime.getTime() + nightTime)
+                    this.times.firefighters[firefighter].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    startDutyTime.setTime(end)
+                    usedDriversTime += nightTime
+                }
+
+                // Morning
+                let allMorningTime = 2.5*60*60*1000
+                let morningTime = allMorningTime/ffLength
+
+                for (let firefighter in this.list.firefighters) {
+                    let start = new Date(startDutyTime.getTime())
+                    let end = new Date(startDutyTime.getTime() + morningTime)
+                    this.times.firefighters[firefighter].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    startDutyTime.setTime(end)
+                    usedDriversTime += morningTime
+                }
             }
         }
     }

@@ -68491,10 +68491,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['list'],
-    mounted: function mounted() {},
+    data: function data() {
+        return {
+            times: {
+                drivers: [],
+                firefighters: []
+            }
+        };
+    },
+    created: function created() {
+        this.getDutyTimes();
+    },
+    beforeUpdate: function beforeUpdate() {
+        this.getDutyTimes();
+    },
 
     methods: {
         save: function save() {
@@ -68518,23 +68541,108 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 return response.json();
             }).then(function (response) {
-                _this.flash = document.querySelector('.flash');
+                _this.flashSelector = document.querySelector('.flash');
 
                 if (response.completed) {
-                    _this.fade = document.querySelector('.alert-success');
+                    _this.alertSelector = document.querySelector('.alert-success');
                 } else {
-                    _this.fade = document.querySelector('.alert-danger');
+                    _this.alertSelector = document.querySelector('.alert-danger');
                 }
 
-                _this.fade.classList.remove('invisible');
-                _this.flash.classList.add('is-visible');
+                _this.alertSelector.classList.remove('invisible');
+                _this.flashSelector.classList.add('is-visible');
 
                 setTimeout(function () {
-                    _this.flash.classList.remove('is-visible').add('invisible');
+                    _this.flashSelector.classList.remove('is-visible');
+                    _this.alertSelector.classList.add('invisible');
                 }, 5000);
             }).catch(function (error) {
                 return console.log(error);
             });
+        },
+
+        getDutyTimes: function getDutyTimes() {
+            console.log(this.list, this.times);
+            var startDutyTime = new Date();
+            startDutyTime.setHours(8);
+            startDutyTime.setMinutes(30);
+            startDutyTime.setSeconds(0);
+            //const endDutyTime = new Date(startDutyTime.getTime() + 1000*60*60*24)
+            var dayTime = 1000 * 60 * 60 * 24;
+
+            var oneEmployeeTime = dayTime / (this.list.drivers.length + this.list.firefighters.length);
+
+            var allDriversTime = oneEmployeeTime * this.list.drivers.length;
+            var usedDriversTime = 0;
+            var allFirefightersTime = oneEmployeeTime * this.list.firefighters.length;
+
+            // drivers
+            // first half
+            var driverFirstDutyTime = 1000 * 60 * 60 * 2;
+            for (var driver in this.list.drivers) {
+                this.times.drivers[driver] = [];
+                var start = new Date(startDutyTime.getTime());
+                var end = new Date(startDutyTime.getTime() + driverFirstDutyTime);
+                this.times.drivers[driver].push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                startDutyTime.setTime(end);
+                usedDriversTime += driverFirstDutyTime;
+            }
+
+            //second half
+            var driversRemainingTime = allDriversTime - usedDriversTime;
+            var driverSecondDutyTime = driversRemainingTime / this.list.drivers.length;
+
+            for (var _driver in this.list.drivers) {
+                var _start = new Date(startDutyTime.getTime());
+                var _end = new Date(startDutyTime.getTime() + driverSecondDutyTime);
+                this.times.drivers[_driver].push(_start.getHours() + ':' + ("00" + _start.getMinutes()).slice(-2) + ' - ' + _end.getHours() + ':' + ("00" + _end.getMinutes()).slice(-2));
+                startDutyTime.setTime(_end);
+                usedDriversTime += driverSecondDutyTime;
+            }
+
+            // Firefighters
+            // Evening
+            var eveningEnd = new Date();
+            eveningEnd.setHours(22);
+            eveningEnd.setMinutes(0);
+            eveningEnd.setSeconds(0);
+
+            var ffAllEveningTime = eveningEnd.getTime() - startDutyTime.getTime();
+            var ffLength = this.list.firefighters.length;
+            var ffEveningTime = ffAllEveningTime / ffLength;
+
+            for (var firefighter in this.list.firefighters) {
+                this.times.firefighters[firefighter] = [];
+                var _start2 = new Date(startDutyTime.getTime());
+                var _end2 = new Date(startDutyTime.getTime() + ffEveningTime);
+                this.times.firefighters[firefighter].push(_start2.getHours() + ':' + ("00" + _start2.getMinutes()).slice(-2) + ' - ' + _end2.getHours() + ':' + ("00" + _end2.getMinutes()).slice(-2));
+                startDutyTime.setTime(_end2);
+                usedDriversTime += ffEveningTime;
+            }
+
+            // Night
+            var allNightTime = 8 * 60 * 60 * 1000;
+            var nightTime = allNightTime / ffLength;
+
+            for (var _firefighter in this.list.firefighters) {
+                var _start3 = new Date(startDutyTime.getTime());
+                var _end3 = new Date(startDutyTime.getTime() + nightTime);
+                this.times.firefighters[_firefighter].push(_start3.getHours() + ':' + ("00" + _start3.getMinutes()).slice(-2) + ' - ' + _end3.getHours() + ':' + ("00" + _end3.getMinutes()).slice(-2));
+                startDutyTime.setTime(_end3);
+                usedDriversTime += nightTime;
+            }
+
+            // Morning
+            var allMorningTime = 2.5 * 60 * 60 * 1000;
+            var morningTime = allMorningTime / ffLength;
+
+            for (var _firefighter2 in this.list.firefighters) {
+                var _start4 = new Date(startDutyTime.getTime());
+                var _end4 = new Date(startDutyTime.getTime() + morningTime);
+                this.times.firefighters[_firefighter2].push(_start4.getHours() + ':' + ("00" + _start4.getMinutes()).slice(-2) + ' - ' + _end4.getHours() + ':' + ("00" + _end4.getMinutes()).slice(-2));
+                startDutyTime.setTime(_end4);
+                usedDriversTime += morningTime;
+            }
         }
     }
 });
@@ -68550,15 +68658,37 @@ var render = function() {
   return _c("div", { staticClass: "col-md-6" }, [
     _c(
       "ul",
-      _vm._l(_vm.list.drivers, function(name) {
-        return _c("li", [_vm._v(_vm._s(name))])
+      _vm._l(_vm.list.drivers, function(name, index) {
+        return _c(
+          "li",
+          [
+            _vm._v("\n           " + _vm._s(name) + "\n           "),
+            _vm._l(_vm.times.drivers[index], function(time) {
+              return _c("span", [
+                _vm._v("\n               " + _vm._s(time) + "\n           ")
+              ])
+            })
+          ],
+          2
+        )
       })
     ),
     _vm._v(" "),
     _c(
       "ul",
-      _vm._l(_vm.list.firefighters, function(name) {
-        return _c("li", [_vm._v(_vm._s(name))])
+      _vm._l(_vm.list.firefighters, function(name, index) {
+        return _c(
+          "li",
+          [
+            _vm._v("\n           " + _vm._s(name) + "\n           "),
+            _vm._l(_vm.times.firefighters[index], function(time) {
+              return _c("span", [
+                _vm._v("\n               " + _vm._s(time) + "\n           ")
+              ])
+            })
+          ],
+          2
+        )
       })
     ),
     _vm._v(" "),
