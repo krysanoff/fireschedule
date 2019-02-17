@@ -68568,14 +68568,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['list'],
-    data: function data() {
-        return {
-            times: {
-                drivers: [],
-                firefighters: []
-            }
-        };
-    },
     created: function created() {
         this.getDutyTimes();
     },
@@ -68627,6 +68619,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         getDutyTimes: function getDutyTimes() {
+            var _this2 = this;
+
             var startDutyTime = new Date();
             startDutyTime.setHours(8);
             startDutyTime.setMinutes(30);
@@ -68643,27 +68637,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // drivers
             // first half
             var driverFirstDutyTime = 1000 * 60 * 60 * 2;
-            this.list.drivers['time'] = [];
-            for (var driver in this.list.drivers) {
-                this.list.drivers['time'][driver] = [];
+            console.log(this.list.drivers);
+            this.list.drivers.forEach(function (value, i) {
+                _this2.list.drivers[i].time = [];
+                console.log(_this2.list.drivers[i]);
                 var start = new Date(startDutyTime.getTime());
                 var end = new Date(startDutyTime.getTime() + driverFirstDutyTime);
-                this.list.drivers['time'][driver].push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                _this2.list.drivers[i].time.push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
                 startDutyTime.setTime(end);
                 usedDriversTime += driverFirstDutyTime;
-            }
+            });
 
             //second half
             var driversRemainingTime = allDriversTime - usedDriversTime;
             var driverSecondDutyTime = driversRemainingTime / this.list.drivers.length;
 
-            for (var _driver in this.list.drivers) {
-                var _start = new Date(startDutyTime.getTime());
-                var _end = new Date(startDutyTime.getTime() + driverSecondDutyTime);
-                this.list.drivers['time'][_driver].push(_start.getHours() + ':' + ("00" + _start.getMinutes()).slice(-2) + ' - ' + _end.getHours() + ':' + ("00" + _end.getMinutes()).slice(-2));
-                startDutyTime.setTime(_end);
+            this.list.drivers.forEach(function (value, i) {
+                var start = new Date(startDutyTime.getTime());
+                var end = new Date(startDutyTime.getTime() + driverSecondDutyTime);
+                _this2.list.drivers[i].time.push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                startDutyTime.setTime(end);
                 usedDriversTime += driverSecondDutyTime;
-            }
+            });
 
             // Firefighters
             // Evening
@@ -68676,38 +68671,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var ffLength = this.list.firefighters.length;
             var ffEveningTime = ffAllEveningTime / ffLength;
 
-            for (var firefighter in this.list.firefighters) {
-                this.list.firefighters['time'][firefighter] = [];
-                var _start2 = new Date(startDutyTime.getTime());
-                var _end2 = new Date(startDutyTime.getTime() + ffEveningTime);
-                this.list.firefighters[firefighter]['time'].push(_start2.getHours() + ':' + ("00" + _start2.getMinutes()).slice(-2) + ' - ' + _end2.getHours() + ':' + ("00" + _end2.getMinutes()).slice(-2));
-                startDutyTime.setTime(_end2);
+            this.list.firefighters.forEach(function (value, i) {
+                _this2.list.firefighters[i].time = [];
+                var start = new Date(startDutyTime.getTime());
+                var end = new Date(startDutyTime.getTime() + ffEveningTime);
+                _this2.list.firefighters[i].time.push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                startDutyTime.setTime(end);
                 usedDriversTime += ffEveningTime;
-            }
+            });
 
             // Night
             var allNightTime = 8 * 60 * 60 * 1000;
             var nightTime = allNightTime / ffLength;
 
-            for (var _firefighter in this.list.firefighters) {
-                var _start3 = new Date(startDutyTime.getTime());
-                var _end3 = new Date(startDutyTime.getTime() + nightTime);
-                this.list.firefighters[_firefighter]['time'].push(_start3.getHours() + ':' + ("00" + _start3.getMinutes()).slice(-2) + ' - ' + _end3.getHours() + ':' + ("00" + _end3.getMinutes()).slice(-2));
-                startDutyTime.setTime(_end3);
+            this.list.firefighters.forEach(function (value, i) {
+                var start = new Date(startDutyTime.getTime());
+                var end = new Date(startDutyTime.getTime() + nightTime);
+                _this2.list.firefighters[i].time.push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                startDutyTime.setTime(end);
                 usedDriversTime += nightTime;
-            }
+            });
 
             // Morning
             var allMorningTime = 2.5 * 60 * 60 * 1000;
             var morningTime = allMorningTime / ffLength;
 
-            for (var _firefighter2 in this.list.firefighters) {
-                var _start4 = new Date(startDutyTime.getTime());
-                var _end4 = new Date(startDutyTime.getTime() + morningTime);
-                this.list.firefighters[_firefighter2]['time'].push(_start4.getHours() + ':' + ("00" + _start4.getMinutes()).slice(-2) + ' - ' + _end4.getHours() + ':' + ("00" + _end4.getMinutes()).slice(-2));
-                startDutyTime.setTime(_end4);
+            this.list.firefighters.forEach(function (value, i) {
+                var start = new Date(startDutyTime.getTime());
+                var end = new Date(startDutyTime.getTime() + morningTime);
+                _this2.list.firefighters[i].time.push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                startDutyTime.setTime(end);
                 usedDriversTime += morningTime;
-            }
+            });
         }
     }
 });
@@ -68723,13 +68718,13 @@ var render = function() {
   return _c("div", { staticClass: "col-md-6" }, [
     _c(
       "ul",
-      _vm._l(_vm.list.drivers, function(name, index) {
+      _vm._l(_vm.list.drivers, function(driver, index) {
         return _c(
           "li",
           { key: index },
           [
-            _vm._v("\n           " + _vm._s(name) + "\n           "),
-            _vm._l(_vm.list.drivers[index]["time"], function(time) {
+            _vm._v("\n           " + _vm._s(driver.name) + "\n           "),
+            _vm._l(_vm.list.drivers[index].time, function(time) {
               return _c("span", [
                 _vm._v("\n               " + _vm._s(time) + "\n           ")
               ])
@@ -68742,13 +68737,13 @@ var render = function() {
     _vm._v(" "),
     _c(
       "ul",
-      _vm._l(_vm.list.firefighters, function(name, index) {
+      _vm._l(_vm.list.firefighters, function(ff, index) {
         return _c(
           "li",
           { key: index },
           [
-            _vm._v("\n           " + _vm._s(name) + "\n           "),
-            _vm._l(_vm.times.firefighters[index]["time"], function(time) {
+            _vm._v("\n           " + _vm._s(ff.name) + "\n           "),
+            _vm._l(_vm.list.firefighters[index].time, function(time) {
               return _c("span", [
                 _vm._v("\n               " + _vm._s(time) + "\n           ")
               ])
