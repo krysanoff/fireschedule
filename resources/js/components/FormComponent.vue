@@ -5,10 +5,12 @@
                         <div class="col-6">
                             <fieldset>
                                 <li v-for="(name, index) in list.drivers" class="list-unstyled input-group">
-                                    <input type="text" v-model="list.drivers[index]" class="form-control" >
+                                    <input type="text" v-model="list.drivers[index].name" class="form-control">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <a href="#" v-on:click.prevent="remove(list.drivers, index)">
+                                            <a href="#"
+                                               v-if="list.drivers.length > 1"
+                                               v-on:click.prevent="remove(list.drivers, index)">
                                                 <v-icon name="times" />
                                             </a>
                                         </div>
@@ -24,16 +26,23 @@
                         <div class="col-6">
                             <fieldset>
                                 <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group">
-                                    <input type="text" v-model="list.firefighters[index]" class="form-control">
+                                    <input type="text" v-model="list.firefighters[index].name" class="form-control">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
-                                            <a href="#">
+                                            <a href="#"
+                                               v-if="list.firefighters.length > 1"
+                                               v-on:click.prevent="remove(list.firefighters, index)">
                                                 <v-icon name="times" />
                                             </a>
                                         </div>
                                     </div>
                                 </li>
                             </fieldset>
+                            <div>
+                                <a v-on:click="up(list.firefighters)"><v-icon name="arrow-up" /></a>
+                                <a v-on:click="down(list.firefighters)"><v-icon name="arrow-down" /></a>
+                                <a v-on:click="add(list.firefighters)"><v-icon name="plus" /></a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -74,7 +83,6 @@
 
             remove: function (arr, index) {
                 arr.splice(index, 1)
-                return arr
             }
         }
     }

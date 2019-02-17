@@ -68188,8 +68188,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             list: this.graphList
         };
-    },
-    mounted: function mounted() {}
+    }
 });
 
 /***/ }),
@@ -68198,6 +68197,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -68271,7 +68279,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         remove: function remove(arr, index) {
             arr.splice(index, 1);
-            return arr;
         }
     }
 });
@@ -68297,39 +68304,45 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.list.drivers[index],
-                      expression: "list.drivers[index]"
+                      value: _vm.list.drivers[index].name,
+                      expression: "list.drivers[index].name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text" },
-                  domProps: { value: _vm.list.drivers[index] },
+                  domProps: { value: _vm.list.drivers[index].name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.list.drivers, index, $event.target.value)
+                      _vm.$set(
+                        _vm.list.drivers[index],
+                        "name",
+                        $event.target.value
+                      )
                     }
                   }
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-group-append" }, [
                   _c("div", { staticClass: "input-group-text" }, [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.remove(_vm.list.drivers, index)
-                          }
-                        }
-                      },
-                      [_c("v-icon", { attrs: { name: "times" } })],
-                      1
-                    )
+                    _vm.list.drivers.length > 1
+                      ? _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.remove(_vm.list.drivers, index)
+                              }
+                            }
+                          },
+                          [_c("v-icon", { attrs: { name: "times" } })],
+                          1
+                        )
+                      : _vm._e()
                   ])
                 ])
               ])
@@ -68388,21 +68401,21 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.list.firefighters[index],
-                      expression: "list.firefighters[index]"
+                      value: _vm.list.firefighters[index].name,
+                      expression: "list.firefighters[index].name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text" },
-                  domProps: { value: _vm.list.firefighters[index] },
+                  domProps: { value: _vm.list.firefighters[index].name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(
-                        _vm.list.firefighters,
-                        index,
+                        _vm.list.firefighters[index],
+                        "name",
                         $event.target.value
                       )
                     }
@@ -68411,17 +68424,68 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "input-group-append" }, [
                   _c("div", { staticClass: "input-group-text" }, [
-                    _c(
-                      "a",
-                      { attrs: { href: "#" } },
-                      [_c("v-icon", { attrs: { name: "times" } })],
-                      1
-                    )
+                    _vm.list.firefighters.length > 1
+                      ? _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.remove(_vm.list.firefighters, index)
+                              }
+                            }
+                          },
+                          [_c("v-icon", { attrs: { name: "times" } })],
+                          1
+                        )
+                      : _vm._e()
                   ])
                 ])
               ])
             })
-          )
+          ),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.up(_vm.list.firefighters)
+                  }
+                }
+              },
+              [_c("v-icon", { attrs: { name: "arrow-up" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.down(_vm.list.firefighters)
+                  }
+                }
+              },
+              [_c("v-icon", { attrs: { name: "arrow-down" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.add(_vm.list.firefighters)
+                  }
+                }
+              },
+              [_c("v-icon", { attrs: { name: "plus" } })],
+              1
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -68515,7 +68579,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         this.getDutyTimes();
     },
-    beforeUpdate: function beforeUpdate() {
+    updated: function updated() {
         this.getDutyTimes();
     },
 
@@ -68538,6 +68602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 //window.print()
                 console.log(response);
+                console.error('eerrrooorr');
 
                 return response.json();
             }).then(function (response) {
@@ -68562,7 +68627,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         getDutyTimes: function getDutyTimes() {
-            console.log(this.list, this.times);
             var startDutyTime = new Date();
             startDutyTime.setHours(8);
             startDutyTime.setMinutes(30);
@@ -68579,11 +68643,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // drivers
             // first half
             var driverFirstDutyTime = 1000 * 60 * 60 * 2;
+            this.list.drivers['time'] = [];
             for (var driver in this.list.drivers) {
-                this.times.drivers[driver] = [];
+                this.list.drivers['time'][driver] = [];
                 var start = new Date(startDutyTime.getTime());
                 var end = new Date(startDutyTime.getTime() + driverFirstDutyTime);
-                this.times.drivers[driver].push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
+                this.list.drivers['time'][driver].push(start.getHours() + ':' + ("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours() + ':' + ("00" + end.getMinutes()).slice(-2));
                 startDutyTime.setTime(end);
                 usedDriversTime += driverFirstDutyTime;
             }
@@ -68595,7 +68660,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             for (var _driver in this.list.drivers) {
                 var _start = new Date(startDutyTime.getTime());
                 var _end = new Date(startDutyTime.getTime() + driverSecondDutyTime);
-                this.times.drivers[_driver].push(_start.getHours() + ':' + ("00" + _start.getMinutes()).slice(-2) + ' - ' + _end.getHours() + ':' + ("00" + _end.getMinutes()).slice(-2));
+                this.list.drivers['time'][_driver].push(_start.getHours() + ':' + ("00" + _start.getMinutes()).slice(-2) + ' - ' + _end.getHours() + ':' + ("00" + _end.getMinutes()).slice(-2));
                 startDutyTime.setTime(_end);
                 usedDriversTime += driverSecondDutyTime;
             }
@@ -68612,10 +68677,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var ffEveningTime = ffAllEveningTime / ffLength;
 
             for (var firefighter in this.list.firefighters) {
-                this.times.firefighters[firefighter] = [];
+                this.list.firefighters['time'][firefighter] = [];
                 var _start2 = new Date(startDutyTime.getTime());
                 var _end2 = new Date(startDutyTime.getTime() + ffEveningTime);
-                this.times.firefighters[firefighter].push(_start2.getHours() + ':' + ("00" + _start2.getMinutes()).slice(-2) + ' - ' + _end2.getHours() + ':' + ("00" + _end2.getMinutes()).slice(-2));
+                this.list.firefighters[firefighter]['time'].push(_start2.getHours() + ':' + ("00" + _start2.getMinutes()).slice(-2) + ' - ' + _end2.getHours() + ':' + ("00" + _end2.getMinutes()).slice(-2));
                 startDutyTime.setTime(_end2);
                 usedDriversTime += ffEveningTime;
             }
@@ -68627,7 +68692,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             for (var _firefighter in this.list.firefighters) {
                 var _start3 = new Date(startDutyTime.getTime());
                 var _end3 = new Date(startDutyTime.getTime() + nightTime);
-                this.times.firefighters[_firefighter].push(_start3.getHours() + ':' + ("00" + _start3.getMinutes()).slice(-2) + ' - ' + _end3.getHours() + ':' + ("00" + _end3.getMinutes()).slice(-2));
+                this.list.firefighters[_firefighter]['time'].push(_start3.getHours() + ':' + ("00" + _start3.getMinutes()).slice(-2) + ' - ' + _end3.getHours() + ':' + ("00" + _end3.getMinutes()).slice(-2));
                 startDutyTime.setTime(_end3);
                 usedDriversTime += nightTime;
             }
@@ -68639,7 +68704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             for (var _firefighter2 in this.list.firefighters) {
                 var _start4 = new Date(startDutyTime.getTime());
                 var _end4 = new Date(startDutyTime.getTime() + morningTime);
-                this.times.firefighters[_firefighter2].push(_start4.getHours() + ':' + ("00" + _start4.getMinutes()).slice(-2) + ' - ' + _end4.getHours() + ':' + ("00" + _end4.getMinutes()).slice(-2));
+                this.list.firefighters[_firefighter2]['time'].push(_start4.getHours() + ':' + ("00" + _start4.getMinutes()).slice(-2) + ' - ' + _end4.getHours() + ':' + ("00" + _end4.getMinutes()).slice(-2));
                 startDutyTime.setTime(_end4);
                 usedDriversTime += morningTime;
             }
@@ -68661,9 +68726,10 @@ var render = function() {
       _vm._l(_vm.list.drivers, function(name, index) {
         return _c(
           "li",
+          { key: index },
           [
             _vm._v("\n           " + _vm._s(name) + "\n           "),
-            _vm._l(_vm.times.drivers[index], function(time) {
+            _vm._l(_vm.list.drivers[index]["time"], function(time) {
               return _c("span", [
                 _vm._v("\n               " + _vm._s(time) + "\n           ")
               ])
@@ -68679,9 +68745,10 @@ var render = function() {
       _vm._l(_vm.list.firefighters, function(name, index) {
         return _c(
           "li",
+          { key: index },
           [
             _vm._v("\n           " + _vm._s(name) + "\n           "),
-            _vm._l(_vm.times.firefighters[index], function(time) {
+            _vm._l(_vm.times.firefighters[index]["time"], function(time) {
               return _c("span", [
                 _vm._v("\n               " + _vm._s(time) + "\n           ")
               ])

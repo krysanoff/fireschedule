@@ -9,7 +9,26 @@ use Illuminate\View\View;
 class GraphController extends Controller
 {
     public function getGraph() {
-        $list = Graph::orderBy('created_at', 'desc')->first()->list;
+        $lastShift = Graph::orderBy('created_at', 'desc')->first();
+
+        if (empty($lastShift)) {
+            $list = new \stdClass();
+
+            $person = new \stdClass();
+            $person->name = '';
+            $person->time = [];
+
+            $list->drivers = [$person];
+            $list->firefighters = [$person];
+            $list->duties = new \stdClass();
+            $list->duties->duty_chief = '';
+            $list->duties->duty_man = '';
+            $list->duties->facade = '';
+
+            $list = json_encode($list);
+        } else {
+            $list = $lastShift->list;
+        }
 
         return view('welcome', compact('list'));
     }

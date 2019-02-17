@@ -19,9 +19,6 @@
             return {
                 list: this.graphList
             }
-        },
-        mounted() {
-
         }
     }
 </script>
