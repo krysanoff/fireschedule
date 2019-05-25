@@ -1,1 +1,2 @@
-# Specially for firefighter of Tarko-Sale
+# Fireschudule
+Service for Tarko-Sale fire department's shifts
