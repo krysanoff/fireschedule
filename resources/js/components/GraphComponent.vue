@@ -30,10 +30,10 @@
         props: [
           'list'
         ],
-        created() {
+        mounted() {
             this.getDutyTimes()
         },
-        updated() {
+        beforeUpdate() {
             this.getDutyTimes()
         },
         methods: {

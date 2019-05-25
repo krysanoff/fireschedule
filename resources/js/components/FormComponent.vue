@@ -78,7 +78,10 @@
             },
 
             add: function (arr) {
-                return arr.push("")
+                return arr.push({
+                    name: '',
+                    time: []
+                })
             },
 
             remove: function (arr, index) {
