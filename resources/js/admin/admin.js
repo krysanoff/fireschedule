@@ -4,7 +4,8 @@ import 'croppie'
 import 'croppie/croppie.css'
 
 $(document).ready(function () {
-    let $uploadCrop = $('#upload').croppie({
+    let $uploadImage = $('#uploadImage')
+    let $fullImage = $('#fullImage').croppie({
         enableExif: true,
         viewport: {
             width: 225,
@@ -17,35 +18,27 @@ $(document).ready(function () {
     })
 
 
-    $('#uploadImage').on('change', function () {
-        let reader = new FileReader();
+    $uploadImage.on('change', function () {
+        let reader = new FileReader()
         reader.onload = function (e) {
-            $uploadCrop.croppie('bind', {
+            $fullImage.croppie('bind', {
                 url: e.target.result
             }).then(function(){
-                console.log('jQuery bind complete');
-            });
+                console.log('jQuery bind complete')
+            })
         }
-        reader.readAsDataURL(this.files[0]);
-    });
+        reader.readAsDataURL(this.files[0])
+    })
 
 
-    /*
-    $('.upload-result').on('click', function (ev) {
-        $uploadCrop.croppie('result', {
+    $('#crop').on('click', function () {
+        $fullImage.croppie('result', {
             type: 'canvas',
             size: 'viewport'
         }).then(function (resp) {
-            $.ajax({
-                url: "/image-crop",
-                type: "POST",
-                data: {"image":resp},
-                success: function (data) {
-                    html = '<img src="' + resp + '" />';
-                    $("#upload-demo-i").html(html);
-                }
-            });
-        });
-    });*/
-
+            let html = '<img src="' + resp + '" />'
+            $("#croppedImage").html(html)
+            $('input[name="croppedImage"]').val(resp)
+        })
+    })
 })

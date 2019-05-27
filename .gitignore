@@ -41,3 +41,4 @@ yarn-error.log*
 /.idea
 /public/js/app.js
 /public/js/app.min.js
+/public/upload/

@@ -56,6 +56,17 @@ class AdminController extends Controller
         $employee->rank_id = $request->rank;
         $employee->shift_id = $request->shift;
 
+        if ($request->croppedImage) {
+            $image_name = $employee->lastname."_".time().".png";
+            $path = public_path()."/upload/employees/".$image_name;
+
+            list(, $image_src) = explode(",", $request->croppedImage);
+
+            if (file_put_contents($path, base64_decode($image_src))) {
+                $employee->pic_path = $image_name;
+            }
+        }
+
         if ($employee->save()) {
             $request->session()->flash('message',
                 "Добавлен новый сотрудник - {$employee->lastname} {$employee->firstname}");
