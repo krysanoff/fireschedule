@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('admin', compact('employees'));
+        return view('admin/index', compact('employees'));
     }
 
     public function newEmployee(FormBuilder $formBuilder)
