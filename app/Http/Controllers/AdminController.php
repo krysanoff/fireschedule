@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('admin/index', compact('employees'));
+        return view('admin.index', compact('employees'));
     }
 
     public function newEmployee(FormBuilder $formBuilder)
@@ -37,7 +37,7 @@ class AdminController extends Controller
             'method' => 'POST',
             'url'    => route('addEmployee'),
         ]);
-        return view('newEmployee', compact('form'));
+        return view('admin.newEmployee', compact('form'));
     }
 
     public function getEmployee($id)

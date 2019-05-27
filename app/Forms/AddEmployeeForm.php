@@ -5,7 +5,6 @@ namespace App\Forms;
 use App\Post;
 use App\Rank;
 use App\Shift;
-use function foo\func;
 use Kris\LaravelFormBuilder\Form;
 
 class AddEmployeeForm extends Form
@@ -51,6 +50,11 @@ class AddEmployeeForm extends Form
                 'property' => 'shift_number',
                 'query_builder' => Shift::all(),
                 'label' => 'Караул'
+            ])
+            ->add('pic_path', 'file', [
+                'label' => 'Фото',
+                'rules' => 'mimes:jpg,jpeg,png',
+                'attr' => ['class' => 'form-control-file'],
             ])
             ->add('submit', 'submit', [
                 'label' => 'Добавить',
