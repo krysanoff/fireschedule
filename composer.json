@@ -13,7 +13,8 @@
         "kris/laravel-form-builder": "^1.15",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "qcod/laravel-imageup": "^1.0"
+        "qcod/laravel-imageup": "^1.0",
+        "doctrine/dbal": "v2.9.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
