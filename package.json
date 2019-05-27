@@ -20,6 +20,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
+        "croppie": "^2.6.4",
         "vue-awesome": "^3.2.0"
     }
 }

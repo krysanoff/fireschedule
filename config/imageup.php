@@ -18,7 +18,7 @@ return [
      * file_input field on option present upon model update and create.
      * can be override in individual field options
      */
-    'auto_upload_images' => true,
+    'auto_upload_images' => false,
 
     /**
      * It will auto delete images once record is deleted from database

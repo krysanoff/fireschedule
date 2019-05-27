@@ -54,7 +54,20 @@ class AddEmployeeForm extends Form
             ->add('pic_path', 'file', [
                 'label' => 'Фото',
                 'rules' => 'mimes:jpg,jpeg,png',
-                'attr' => ['class' => 'form-control-file'],
+                'attr' => ['class' => 'form-control-file', 'id' => 'uploadImage'],
+                'help_block' => [
+                    'text' => <<<HTML
+                        <div class="row">
+                        <div class="col" id="upload"></div>
+                        <div class="col">
+                            <a id="crop" class="btn btn-success text-light">Crop</a>
+                        </div>
+                        <div class="col" id="uploadCropResult"></div>
+                        </div>
+                        HTML,
+                    'tag' => 'div',
+                    'attr' => ['class' => 'col-12']
+                ],
             ])
             ->add('submit', 'submit', [
                 'label' => 'Добавить',
