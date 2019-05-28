@@ -18,7 +18,7 @@
                                     {{ $employee->lastname }} {{ $employee->firstname }} {{ $employee->middlename }}
                                 </div>
                                 <div class="col-4">
-                                    <a href="{{ route('updateEmployee', $employee->id) }}" class="btn btn-sm btn-info">Edit</a>
+                                    <a href="{{ route('employee', $employee->id) }}" class="btn btn-sm btn-info">Edit</a>
                                     <a href="{{ route('removeEmployee', $employee->id) }}" class="btn btn-sm btn-danger">Delete</a>
                                 </div>
                             </div>

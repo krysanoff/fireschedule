@@ -19,6 +19,13 @@ $(document).ready(function () {
 
 
     $uploadImage.on('change', function () {
+        let $photo = $('#photo')
+        if ($photo) {
+            console.log('photo')
+            $photo.css('display', 'none')
+            $('#new_photo').css('display', 'flex')
+        }
+
         let reader = new FileReader()
         reader.onload = function (e) {
             $fullImage.croppie('bind', {

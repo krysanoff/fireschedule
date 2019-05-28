@@ -37,12 +37,14 @@ class AdminController extends Controller
             'method' => 'POST',
             'url'    => route('addEmployee'),
         ]);
-        return view('admin.newEmployee', compact('form'));
+        return view('admin.employee', compact('form'));
     }
 
-    public function getEmployee($id)
+    public function getEmployee($id, FormBuilder $formBuilder)
     {
-
+        $employee = Employee::find($id)->toArray();
+        $form = $formBuilder->create('App\Forms\AddEmployeeForm', $employee);
+        return view('admin.employee', compact(['form']));
     }
 
     public function addEmployee(Request $request)
