@@ -55,11 +55,11 @@ class AdminController extends Controller
      */
     public function getEmployee($id, FormBuilder $formBuilder)
     {
-        $employee = Employee::find($id)->toArray();
-        $form = $formBuilder->create('App\Forms\AddEmployeeForm', array_merge($employee, [
+        $form = $formBuilder->create('App\Forms\AddEmployeeForm', array_merge(Employee::find($id)->toArray(), [
             'method' => 'POST',
             'url' => route('saveEmployee', ['id' => $id])
         ]));
+
         return view('admin.employee', compact(['form']));
     }
 
