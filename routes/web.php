@@ -20,7 +20,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/employee/new', 'AdminController@newEmployee')->name('newEmployee');
     Route::get('/employee/{id}', 'AdminController@getEmployee')->name('employee');
 
-    Route::post('/employee/add', 'AdminController@addEmployee')->name('addEmployee');
+    Route::post('/employee/save/{id?}', 'AdminController@saveEmployee')->name('saveEmployee');
     Route::delete('/employee/remove/{id}', 'AdminController@removeEmployee')->name('removeEmployee');
     Route::post('/employee/update/{id}', 'AdminController@updateEmployee')->name('updateEmployee');
 });

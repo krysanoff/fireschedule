@@ -41,7 +41,7 @@ class AdminController extends Controller
     {
         $form = $formBuilder->create('App\Forms\AddEmployeeForm', [
             'method' => 'POST',
-            'url'    => route('addEmployee'),
+            'url'    => route('saveEmployee'),
         ]);
         return view('admin.employee', compact('form'));
     }
@@ -56,24 +56,24 @@ class AdminController extends Controller
     public function getEmployee($id, FormBuilder $formBuilder)
     {
         $employee = Employee::find($id)->toArray();
-        $form = $formBuilder->create('App\Forms\AddEmployeeForm', $employee);
+        $form = $formBuilder->create('App\Forms\AddEmployeeForm', array_merge($employee, [
+            'method' => 'POST',
+            'url' => route('saveEmployee', ['id' => $id])
+        ]));
         return view('admin.employee', compact(['form']));
     }
 
-    public function addEmployee(Request $request)
+    public function saveEmployee(Request $request, $id = null)
     {
-        Employee::saveData($request);
+        Employee::saveData($request, $id);
 
         return redirect()->route('admin');
     }
 
-    public function updateEmployee($id)
+    public function removeEmployee($id, Request $request)
     {
+        Employee::remove($id, $request);
 
-    }
-
-    public function removeEmployee($id)
-    {
-
+        return $this->index();
     }
 }

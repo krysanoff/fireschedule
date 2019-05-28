@@ -24,7 +24,7 @@ class Employee extends Model
         return $this->belongsTo('App\Rank');
     }
 
-    public static function saveData(Request $request, $id = null)
+    public static function saveData(Request $request, $id)
     {
         if (is_null($id)) {
             $employee = new Employee();
@@ -54,6 +54,15 @@ class Employee extends Model
         if ($employee->save()) {
             $request->session()->flash('message',
                 "Добавлен новый сотрудник - {$employee->lastname} {$employee->firstname}");
+        }
+    }
+
+    public static function remove($id, Request $request)
+    {
+        $employee = self::find($id);
+        if ($employee->delete()) {
+            $request->session()->flash('message',
+                "Сотрудник {$employee->lastname} {$employee->firstname} удален из базы данных");
         }
     }
 }
