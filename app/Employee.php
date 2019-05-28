@@ -28,10 +28,11 @@ class Employee extends Model
     {
         if (is_null($id)) {
             $employee = new Employee();
+            $flashMessage = "Добавлен новый сотрудник - {$employee->lastname} {$employee->firstname}";
         } else {
             $employee = self::find($id);
+            $flashMessage = "{$employee->lastname} {$employee->firstname}. Данные сотрудника сохранены.";
         }
-
 
         $employee->firstname = $request->firstname;
         $employee->lastname = $request->lastname;
@@ -52,8 +53,7 @@ class Employee extends Model
         }
 
         if ($employee->save()) {
-            $request->session()->flash('message',
-                "Добавлен новый сотрудник - {$employee->lastname} {$employee->firstname}");
+            $request->session()->flash('message', $flashMessage);
         }
     }
 
