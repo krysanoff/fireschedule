@@ -14,26 +14,9 @@
 
     </head>
     <body>
-        <header class="navbar navbar-expand">
-            <div class="container-fluid">
-                <div class="col-4">
-                    <a href="{{ route('index') }}" class="nav-link text-dark">{{ config('app.name') }}</a>
-                </div>
-                <div class="col-4"></div>
-                <div class="col-4"></div>
-            </div>
-        </header>
-        <div id="app">
-            <app-component v-bind:graph-list="{{ $list }}"></app-component>
-        </div>
-        <div class="flash">
-            <p class="alert alert-success invisible" role="alert">
-                График успешно сохранен
-            </p>
-            <p class="alert alert-danger invisible" role="alert">
-                Произошла ошибка при сохранении графика
-            </p>
-        </div>
-        <script src="{{ asset('js/app.js') }}"></script>
+    <a href="{{ route('graph', ['shift' => 1]) }}" class="btn">1 караул</a>
+    <a href="{{ route('graph', ['shift' => 2]) }}" class="btn">2 караул</a>
+    <a href="{{ route('graph', ['shift' => 3]) }}" class="btn">3 караул</a>
+    <a href="{{ route('graph', ['shift' => 4]) }}" class="btn">4 караул</a>
     </body>
 </html>

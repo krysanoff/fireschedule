@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'GraphController@getGraph')->name('index');
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+Route::get('/shift/{shift}', 'GraphController@getGraph')->name('graph')->where('name', '[1-4]+');
 
 Auth::routes();
 

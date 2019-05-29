@@ -30,7 +30,7 @@ class GraphController extends Controller
             $list = $lastShift->list;
         }
 
-        return view('index', compact('list'));
+        return view('graph', compact('list'));
     }
 
     public function saveGraph(Request $request) {

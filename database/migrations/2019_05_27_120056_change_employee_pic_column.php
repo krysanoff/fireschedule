@@ -25,6 +25,8 @@ class ChangeEmployeePicColumn extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('employees', function (Blueprint $table) {
+            $table->string('pic_path', 256)->change();
+        });
     }
 }
