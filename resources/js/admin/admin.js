@@ -62,7 +62,6 @@ $(document).ready(function () {
             let html = '<img src="' + resp + '" />'
             $("#croppedImage").html(html)
             $('input[name="croppedImage"]').val(resp)
-            $('input[name="changeImage"]').val('true')
         })
     })
 })

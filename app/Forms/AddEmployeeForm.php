@@ -100,9 +100,6 @@ class AddEmployeeForm extends Form
             ->add('croppedImage', 'hidden', [
                 'value' => $photo ?? '',
             ])
-            ->add('changeImage', 'hidden', [
-                'value' => false,
-            ])
             ->add('oldImage', 'hidden', [
                 'value' => $this->getFormOption('pic_path'),
             ])
