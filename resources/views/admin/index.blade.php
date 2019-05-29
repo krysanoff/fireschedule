@@ -12,6 +12,10 @@
                     @endif
 
                     @if(count($employees))
+                        <div id="list">
+                            <app-component :employees="{{ $employees }}"></app-component>
+                        </div>
+
                         @foreach($employees as $employee)
                             <div class="row">
                                 <div class="col-8">
