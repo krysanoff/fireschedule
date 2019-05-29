@@ -9,6 +9,11 @@ use Kris\LaravelFormBuilder\Form;
 
 class AddEmployeeForm extends Form
 {
+    /**
+     * Build form for creating or editing employee's data
+     *
+     * @return mixed|void
+     */
     public function buildForm()
     {
         $this
@@ -69,7 +74,7 @@ class AddEmployeeForm extends Form
                 </div>
                 HTML;
         } else {
-            $photoPath = url('/').env('UPLOAD_EMPLOYEE_PHOTO_DIR').$this->getFormOption('pic_path');
+            $photoPath = env('APP_URL').$this->getFormOption('pic_path');
             $photo = "data:image/png;base64,".base64_encode(file_get_contents($photoPath)); //TODO verify the image src
             $photoBlock = <<<HTML
                 <div id="photo"><img src="{$photoPath}" alt="{$photoPath}"></div>
@@ -94,6 +99,12 @@ class AddEmployeeForm extends Form
             ])
             ->add('croppedImage', 'hidden', [
                 'value' => $photo ?? '',
+            ])
+            ->add('changeImage', 'hidden', [
+                'value' => false,
+            ])
+            ->add('oldImage', 'hidden', [
+                'value' => $this->getFormOption('pic_path'),
             ])
             ->add('submit', 'submit', [
                 'label' => 'Добавить',

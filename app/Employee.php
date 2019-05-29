@@ -40,7 +40,7 @@ class Employee extends Model
     {
         if (is_null($id)) {
             $employee = new Employee();
-            $flashMessage = "Добавлен новый сотрудник - {$employee->lastname} {$employee->firstname}";
+            $flashMessage = "Добавлен новый сотрудник";
         } else {
             $employee = self::find($id);
             $flashMessage = "{$employee->lastname} {$employee->firstname}. Данные сотрудника сохранены.";
@@ -53,14 +53,20 @@ class Employee extends Model
         $employee->rank_id = $request->rank;
         $employee->shift_id = $request->shift;
 
+        // save new image and delete old one
         if ($request->croppedImage) {
             $image_name = $employee->lastname."_".time().".png";
-            $path = public_path()."/upload/employees/".$image_name;
+            $new_image = public_path('/').env('UPLOAD_EMPLOYEE_PHOTO_DIR').$image_name;
+            $old_image = public_path('/').$request->oldImage;
 
             list(, $image_src) = explode(",", $request->croppedImage);
 
-            if (file_put_contents($path, base64_decode($image_src))) {
-                $employee->pic_path = $image_name;
+            if (file_put_contents($new_image, base64_decode($image_src))) {
+                $employee->pic_path = env('UPLOAD_EMPLOYEE_PHOTO_DIR').$image_name;
+
+                if (!empty($request->oldImage)) {
+                    unlink($old_image);
+                }
             }
         }
 
@@ -73,6 +79,7 @@ class Employee extends Model
     {
         $employee = self::find($id);
         if ($employee->delete()) {
+            unlink(public_path('/').$employee->pic_path);
             $request->session()->flash('message',
                 "Сотрудник {$employee->lastname} {$employee->firstname} удален из базы данных");
         }
