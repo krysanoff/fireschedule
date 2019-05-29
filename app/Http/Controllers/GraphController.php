@@ -41,6 +41,7 @@ class GraphController extends Controller
         $graph->updated_at = null;
         $graph->list = json_encode($post['list']);
         $graph->shift_id = $post['shift_id'];
+        $graph->schema = ""; //TODO change it when there will 2 or more schemas
 
         if ($graph->save()) {
             return json_encode(['completed' => true]);

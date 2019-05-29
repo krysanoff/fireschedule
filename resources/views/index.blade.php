@@ -7,13 +7,22 @@
 
         <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 
-        <title>График дежурства караула на {{ date('d.m.Y') }} г.</title>
+        <title>{{ config('app.name') }} - График дежурства</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
     </head>
     <body>
+        <header class="navbar navbar-expand">
+            <div class="container-fluid">
+                <div class="col-4">
+                    <a href="{{ route('index') }}" class="nav-link text-dark">{{ config('app.name') }}</a>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+            </div>
+        </header>
         <div id="app">
             <app-component v-bind:graph-list="{{ $list }}"></app-component>
         </div>

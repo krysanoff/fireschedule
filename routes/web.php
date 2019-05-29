@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'GraphController@getGraph');
+Route::get('/', 'GraphController@getGraph')->name('index');
 
 Auth::routes();
 
