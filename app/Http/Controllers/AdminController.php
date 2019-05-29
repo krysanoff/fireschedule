@@ -74,6 +74,6 @@ class AdminController extends Controller
     {
         Employee::remove($id, $request);
 
-        return $this->index();
+        return redirect()->route('admin');
     }
 }

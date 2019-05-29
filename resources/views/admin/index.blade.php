@@ -15,22 +15,6 @@
                         <div id="list">
                             <app-component :employees="{{ $employees }}"></app-component>
                         </div>
-
-                        @foreach($employees as $employee)
-                            <div class="row">
-                                <div class="col-8">
-                                    {{ $employee->lastname }} {{ $employee->firstname }} {{ $employee->middlename }}
-                                </div>
-                                <div class="col-4 flex-row">
-                                    <a href="{{ route('employee', $employee->id) }}" class="btn btn-sm btn-info">Edit</a>
-                                    <form method="post" action="{{ route('removeEmployee', $employee->id) }}">
-                                        {!! Form::token() !!}
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        @endforeach
                     @endif
                 </div>
                 <div class="card-footer">

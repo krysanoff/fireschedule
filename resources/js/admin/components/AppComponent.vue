@@ -34,7 +34,6 @@
         props: ['employees'],
         data: function () {
             return {
-                employees: this.employees,
                 token: window.laravel_csrf
             }
         }
