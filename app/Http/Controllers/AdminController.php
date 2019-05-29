@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::getAll();
         return view('admin.index', compact('employees'));
     }
 

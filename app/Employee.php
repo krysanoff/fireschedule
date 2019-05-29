@@ -24,6 +24,18 @@ class Employee extends Model
         return $this->belongsTo('App\Rank');
     }
 
+    public static function getAll()
+    {
+        $employees = self::with(['post', 'rank', 'shift'])->get();
+
+        foreach ($employees as $employee) {
+            $employee->employeeRoute = route('employee', $employee->id);
+            $employee->removeRoute = route('removeEmployee', $employee->id);
+        }
+
+        return $employees;
+    }
+
     public static function saveData(Request $request, $id)
     {
         if (is_null($id)) {
