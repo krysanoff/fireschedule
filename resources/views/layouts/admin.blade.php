@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="/js/lang.js"></script>
     <script>
         window.laravel_csrf = document.getElementById('csrf').getAttribute('content')
     </script>
