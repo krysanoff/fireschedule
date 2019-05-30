@@ -1,26 +1,54 @@
 <template>
             <div class="col-md-6">
+                <div class="row mw-100 mb-2 text-center text-uppercase">
+                    <div class="col">
+                        <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <!--<tr class="text-center">
+                            <th scope="col">{{ __('graph.name') }}</th>
+                            <th scope="col">{{ __('graph.time') }}</th>
+                        </tr>-->
+                    </thead>
+                    <tbody>
+                        <tr v-for="driver, index in list.drivers" :key="index">
+                            <td>{{ driver.name }}</td>
+                            <td v-for="time in list.drivers[index].time">
+                                {{ time }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-striped">
+                    <thead>
+                    <!--<tr class="text-center">
+                        <th scope="col">{{ __('graph.name') }}</th>
+                        <th scope="col">{{ __('graph.time') }}</th>
+                    </tr>-->
+                    </thead>
+                    <tbody>
+                    <tr v-for="firefighter, index in list.firefighters" :key="index">
+                        <td>{{ firefighter.name }}</td>
+                        <td v-for="time in list.firefighters[index].time">
+                            {{ time }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
                 <ul>
-                   <li v-for="driver, index in list.drivers" :key="index">
-                       {{ driver.name }}
-                       <span v-for="time in list.drivers[index].time">
-                           {{ time }}
-                       </span>
+                   <li class="row list-unstyled" v-for="(name, index) in list.duties">
+                       <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
+                       <div class="col">{{ name }}</div>
                    </li>
                 </ul>
-                <ul>
-                   <li v-for="ff, index in list.firefighters" :key="index">
-                       {{ ff.name }}
-                       <span v-for="time in list.firefighters[index].time">
-                           {{ time }}
-                       </span>
-                   </li>
-                </ul>
-                <ul>
-                   <li v-for="name in list.duties">{{ name }}</li>
-                </ul>
-                <div>
-                    <a href="" class="btn btn-success" v-on:click.prevent="save">{{ __('graph.print')}}</a>
+                <div class="row">
+                    <div class="col text-center">
+                        <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
+                    </div>
                 </div>
             </div>
 </template>
@@ -161,6 +189,14 @@
                     startDutyTime.setTime(end)
                     usedDriversTime += morningTime
                 })
+            },
+
+            getDate: function () {
+                let myDate = new Date();
+                let month = ('0' + (myDate.getMonth() + 1)).slice(-2);
+                let day = ('0' + myDate.getDate()).slice(-2);
+                let year = myDate.getFullYear();
+                return day + '.' + month + '.' + year;
             }
         }
     }
