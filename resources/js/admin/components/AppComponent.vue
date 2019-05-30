@@ -1,11 +1,11 @@
 <template>
     <table>
         <tr>
-            <th>#</th>
-            <th>ФИО</th>
-            <th>Должность</th>
-            <th>Звание</th>
-            <th>Караул</th>
+            <th>{{ __('admin.id') }}</th>
+            <th>{{ __('admin.name') }}</th>
+            <th>{{ __('admin.post') }}</th>
+            <th>{{ __('admin.rank') }}</th>
+            <th>{{ __('admin.shift') }}</th>
             <th></th>
         </tr>
         <tr v-for="employee in employees">
@@ -16,11 +16,11 @@
             <td>{{ employee.shift.shift_number }}</td>
             <td>
                 <div class="col-4 flex-row">
-                    <a :href="employee.employeeRoute" class="btn btn-sm btn-info">Edit</a>
+                    <a :href="employee.employeeRoute" class="btn btn-sm btn-info">{{ __('admin.edit') }}</a>
                     <form method="post" :action="employee.removeRoute">
                         <input type="hidden" name="_token" :value="token">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-sm btn-danger">{{ __('admin.delete') }}</button>
                     </form>
                 </div>
             </td>

@@ -18,7 +18,7 @@ class AddEmployeeForm extends Form
     {
         $this
             ->add('lastname', 'text', [
-                'label' => 'Фамилия',
+                'label' => trans('employee.lastname'),
                 'rules' => 'required|max:20',
                 'error_messages' => [
                     'lastname.required' => 'Обязательное поле'
@@ -26,7 +26,7 @@ class AddEmployeeForm extends Form
                 'value' => $this->getFormOption('lastname')
             ])
             ->add('firstname', 'text', [
-                'label' => 'Имя',
+                'label' => trans('employee.firstname'),
                 'rules' => 'required|max:20',
                 'error_messages' => [
                     'firstname.required' => 'Обязательное поле'
@@ -34,7 +34,7 @@ class AddEmployeeForm extends Form
                 'value' => $this->getFormOption('firstname'),
             ])
             ->add('middlename', 'text', [
-                'label' => 'Отчество',
+                'label' => trans('employee.middlename'),
                 'rules' => 'max:20',
                 'error_messages' => [
                     'middlename.required' => 'Обязательное поле'
@@ -45,21 +45,21 @@ class AddEmployeeForm extends Form
                 'class' => 'App\Post',
                 'property' => 'name',
                 'query_builder' => Post::all(),
-                'label' => 'Должность',
+                'label' => trans('employee.post'),
                 'selected' => $this->getFormOption('post_id'),
             ])
             ->add('rank', 'entity', [
                 'class' => 'App\Rank',
                 'property' => 'name',
                 'query_builder' => Rank::all(),
-                'label' => 'Звание',
+                'label' => trans('employee.rank'),
                 'selected' => $this->getFormOption('rank_id'),
             ])
             ->add('shift', 'entity', [
                 'class' => 'App\Shift',
                 'property' => 'shift_number',
                 'query_builder' => Shift::all(),
-                'label' => 'Караул',
+                'label' => trans('employee.shift'),
                 'selected' => $this->getFormOption('shift_id'),
             ]);
 
@@ -68,8 +68,11 @@ class AddEmployeeForm extends Form
                 <div class="row">
                     <div class="col" id="fullImage"></div>
                     <div class="col">
-                        <a id="crop" class="btn btn-success text-light">Crop</a>
-                    </div>
+                        <a id="crop" class="btn btn-success text-light">
+                HTML;
+            $photoBlock .= trans('employee.crop');
+            $photoBlock .= <<<HTML
+                </a></div>
                     <div class="col" id="croppedImage"></div>
                 </div>
                 HTML;
@@ -81,14 +84,18 @@ class AddEmployeeForm extends Form
                 <div id="new_photo" style="display: none" class="row">
                     <div class="col" id="fullImage"></div>
                     <div class="col">
-                        <a id="crop" class="btn btn-success text-light">Crop</a>
-                    </div>
-                    <div class="col" id="croppedImage"></div>
-                </div>
+                        <a id="crop" class="btn btn-success text-light">
                 HTML;
+            $photoBlock .= trans('employee.crop');
+            $photoBlock .= <<<HTML
+                </a></div>
+                        <div class="col" id="croppedImage"></div>
+                    </div>
+                HTML;
+
         }
             $this->add('image', 'file', [
-                'label' => 'Фото',
+                'label' => trans('employee.photo'),
                 'rules' => 'mimes:jpg,jpeg,png',
                 'attr' => ['class' => 'form-control-file', 'id' => 'uploadImage', 'value' => 'Выбрать фото'],
                 'help_block' => [
@@ -104,7 +111,7 @@ class AddEmployeeForm extends Form
                 'value' => $this->getFormOption('pic_path'),
             ])
             ->add('submit', 'submit', [
-                'label' => 'Добавить',
+                'label' => trans('employee.save'),
             ]);
     }
 }

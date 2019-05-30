@@ -20,7 +20,7 @@
                    <li v-for="name in list.duties">{{ name }}</li>
                 </ul>
                 <div>
-                    <a href="" class="btn btn-success" v-on:click.prevent="save">Печать</a>
+                    <a href="" class="btn btn-success" v-on:click.prevent="save">{{ __('graph.print')}}</a>
                 </div>
             </div>
 </template>

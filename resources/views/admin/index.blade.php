@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Список сотрудников</div>
+                <div class="card-header">{{ __('admin.employeesList') }}</div>
                 <div class="card-body">
                     @if(Session::has('message'))
                         <p class="alert alert-success">{{ Session::get('message') }}</p>
@@ -18,7 +18,7 @@
                     @endif
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('newEmployee') }}" class="btn btn-success">Добавить сотрудника</a>
+                    <a href="{{ route('newEmployee') }}" class="btn btn-success">{{ __('admin.addEmployee') }}</a>
                 </div>
             </div>
         </div>

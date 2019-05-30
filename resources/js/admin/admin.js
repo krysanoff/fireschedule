@@ -5,6 +5,9 @@ import 'croppie/croppie.css'
 
 import Vue from 'vue'
 
+// Add Laravel localization data to Vue
+Vue.prototype.__ = string => _.get(window.i18n, string)
+
 Vue.component('app-component', require('./components/AppComponent'))
 
 const app = new Vue({

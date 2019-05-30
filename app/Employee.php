@@ -40,10 +40,10 @@ class Employee extends Model
     {
         if (is_null($id)) {
             $employee = new Employee();
-            $flashMessage = "Добавлен новый сотрудник";
+            $flashMessage = trans('messages.addEmployee');
         } else {
             $employee = self::find($id);
-            $flashMessage = "{$employee->lastname} {$employee->firstname}. Данные сотрудника сохранены.";
+            $flashMessage = trans('messages.saveEmployee');
         }
 
         $employee->firstname = $request->firstname;
@@ -79,9 +79,15 @@ class Employee extends Model
     {
         $employee = self::find($id);
         if ($employee->delete()) {
-            unlink(public_path('/').$employee->pic_path);
-            $request->session()->flash('message',
-                "Сотрудник {$employee->lastname} {$employee->firstname} удален из базы данных");
+            if (!is_null($employee->pic_path)) {
+                unlink(public_path('/').$employee->pic_path);
+            }
+
+            $request->session()->flash('message', trans('messages.removeEmployee', [
+                    'lastname' => $employee->lastname,
+                    'firstname' => $employee->firstname
+                ])
+            );
         }
     }
 }

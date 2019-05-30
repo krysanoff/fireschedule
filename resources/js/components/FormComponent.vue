@@ -3,6 +3,7 @@
                 <form class="form-group" id="list">
                     <div class="row">
                         <div class="col-6">
+                            {{ __('graph.drivers')}}
                             <fieldset>
                                 <li v-for="(name, index) in list.drivers" class="list-unstyled input-group">
                                     <input type="text" v-model="list.drivers[index].name" class="form-control">
@@ -24,6 +25,7 @@
                             </div>
                         </div>
                         <div class="col-6">
+                            {{ __('graph.firefighters')}}
                             <fieldset>
                                 <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group">
                                     <input type="text" v-model="list.firefighters[index].name" class="form-control">

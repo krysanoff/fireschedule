@@ -14,7 +14,7 @@ import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons' //TODO change to specific icons to reduce bundle
 
 // Add Laravel localization data to Vue
-Vue.prototype.trans = string => _.get(window.i18n, string)
+Vue.prototype.__ = string => _.get(window.i18n, string)
 
 /**
  * The following block of code may be used to automatically register your
