@@ -1,5 +1,5 @@
 <template>
-            <div class="col-6 card-group">
+            <div class="col-6 card-group d-print-none">
                 <form class="form-group" id="list">
                     <div class="row">
                         <div class="col-6 card">

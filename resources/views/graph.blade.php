@@ -15,7 +15,7 @@
 
     </head>
     <body>
-        <header class="navbar navbar-expand">
+        <header class="navbar navbar-expand d-print-none">
             <div class="container-fluid">
                 <div class="col-2">
                     <a href="{{ route('index') }}" class="nav-link text-dark">{{ config('app.name') }}</a>
@@ -33,7 +33,7 @@
         <div id="app">
             <app-component v-bind:graph-list="{{ $lastGraph }}" v-bind:shift="{{ $shift_id }}"></app-component>
         </div>
-        <div class="flash">
+        <div class="flash d-print-none">
             <p class="alert alert-success invisible" role="alert">
                 {{ __('messages.graph.success') }}
             </p>

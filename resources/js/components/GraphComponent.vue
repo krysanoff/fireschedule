@@ -3,9 +3,10 @@
                 <div class="row mw-100 mb-2 text-center text-uppercase">
                     <div class="col">
                         <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
+                        <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
                     </div>
                 </div>
-                <table class="table table-striped">
+                <table class="table table-sm table-striped">
                     <thead>
                         <!--<tr class="text-center">
                             <th scope="col">{{ __('graph.name') }}</th>
@@ -22,7 +23,7 @@
                     </tbody>
                 </table>
 
-                <table class="table table-striped">
+                <table class="table table-sm table-striped mt-4">
                     <thead>
                     <!--<tr class="text-center">
                         <th scope="col">{{ __('graph.name') }}</th>
@@ -45,7 +46,7 @@
                        <div class="col">{{ name }}</div>
                    </li>
                 </ul>
-                <div class="row">
+                <div class="row d-print-none">
                     <div class="col text-center">
                         <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
                     </div>
@@ -82,7 +83,6 @@
                     .then(response => {
                         //window.print()
                         console.log(response)
-                        console.error('eerrrooorr')
 
                         return response.json()
                     })
@@ -97,6 +97,8 @@
 
                         this.alertSelector.classList.remove('invisible')
                         this.flashSelector.classList.add('is-visible')
+
+                        window.print()
 
                         setTimeout(() => {
                             this.flashSelector.classList.remove('is-visible')
