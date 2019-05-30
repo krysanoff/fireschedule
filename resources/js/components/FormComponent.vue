@@ -1,56 +1,89 @@
 <template>
-            <div class="col-6">
+            <div class="col-6 card-group">
                 <form class="form-group" id="list">
                     <div class="row">
-                        <div class="col-6">
-                            {{ __('graph.drivers')}}
-                            <fieldset>
-                                <li v-for="(name, index) in list.drivers" class="list-unstyled input-group">
-                                    <input type="text" v-model="list.drivers[index].name" class="form-control">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <a href="#"
-                                               v-if="list.drivers.length > 1"
-                                               v-on:click.prevent="remove(list.drivers, index)">
-                                                <v-icon name="times" />
-                                            </a>
+                        <div class="col-6 card">
+                            <div class="card-header">
+                                <div class="card-title text-center">
+                                    <h5 class="text-uppercase">{{ __('graph.drivers')}}</h5>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <fieldset>
+                                    <li v-for="(name, index) in list.drivers" class="list-unstyled input-group mb-1">
+                                        <input type="text" v-model="list.drivers[index].name" class="form-control">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <a class="text-danger pointer"
+                                                   v-if="list.drivers.length > 1"
+                                                   v-on:click.prevent="remove(list.drivers, index)">
+                                                    <v-icon name="times" />
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </fieldset>
-                            <div>
-                                <a v-on:click="up(list.drivers)"><v-icon name="arrow-up" /></a>
-                                <a v-on:click="down(list.drivers)"><v-icon name="arrow-down" /></a>
-                                <a v-on:click="add(list.drivers)"><v-icon name="plus" /></a>
+                                    </li>
+                                </fieldset>
+                            </div>
+
+                            <div class="card-footer row font-weight-bold">
+                                <div class="col-8 text-left text-primary">
+                                    <a class="pointer" v-on:click="up(list.drivers)">
+                                        <v-icon name="arrow-up" scale="1.5" />
+                                    </a>
+                                    <a class="pointer" v-on:click="down(list.drivers)">
+                                        <v-icon name="arrow-down" scale="1.5" />
+                                    </a>
+                                </div>
+                                <div class="col-4 text-right text-success">
+                                    <a class="pointer" v-on:click="add(list.drivers)"><v-icon name="plus" scale="1.5" /></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            {{ __('graph.firefighters')}}
-                            <fieldset>
-                                <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group">
-                                    <input type="text" v-model="list.firefighters[index].name" class="form-control">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <a href="#"
-                                               v-if="list.firefighters.length > 1"
-                                               v-on:click.prevent="remove(list.firefighters, index)">
-                                                <v-icon name="times" />
-                                            </a>
+                        <div class="col-6 card">
+                            <div class="card-header">
+                                <div class="card-title text-center">
+                                    <h5 class="text-uppercase">{{ __('graph.firefighters')}}</h5>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <fieldset>
+                                    <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group mb-1">
+                                        <input type="text" v-model="list.firefighters[index].name" class="form-control">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <a class="text-danger pointer"
+                                                   v-if="list.firefighters.length > 1"
+                                                   v-on:click.prevent="remove(list.firefighters, index)">
+                                                    <v-icon name="times" />
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </fieldset>
-                            <div>
-                                <a v-on:click="up(list.firefighters)"><v-icon name="arrow-up" /></a>
-                                <a v-on:click="down(list.firefighters)"><v-icon name="arrow-down" /></a>
-                                <a v-on:click="add(list.firefighters)"><v-icon name="plus" /></a>
+                                    </li>
+                                </fieldset>
+                            </div>
+
+                            <div class="card-footer row font-weight-bold">
+                                <div class="col-8 text-left text-primary">
+                                    <a class="pointer" v-on:click="up(list.firefighters)">
+                                        <v-icon name="arrow-up" scale="1.5" />
+                                    </a>
+                                    <a class="pointer" v-on:click="down(list.firefighters)">
+                                        <v-icon name="arrow-down" scale="1.5" />
+                                    </a>
+                                </div>
+                                <div class="col-4 text-right text-success">
+                                    <a class="pointer" v-on:click="add(list.firefighters)"><v-icon name="plus" scale="1.5" /></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-5 card border-0">
                         <fieldset>
-                            <li v-for="(name, index) in list.duties" class="list-unstyled">
-                                <input type="text" v-model="list.duties[index]" class="form-control">
+                            <li v-for="(name, index) in list.duties" class="list-unstyled form-group row">
+                                <label :for="index" class="col-4 col-form-label text-right">{{ __('graph.' + index) }}</label>
+                                <div class="col-8">
+                                    <input type="text" :id="index" v-model="list.duties[index]" class="form-control">
+                                </div>
                             </li>
                         </fieldset>
                     </div>

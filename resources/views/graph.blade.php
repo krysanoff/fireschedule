@@ -17,11 +17,17 @@
     <body>
         <header class="navbar navbar-expand">
             <div class="container-fluid">
-                <div class="col-4">
+                <div class="col-2">
                     <a href="{{ route('index') }}" class="nav-link text-dark">{{ config('app.name') }}</a>
                 </div>
-                <div class="col-4"></div>
-                <div class="col-4"></div>
+                <div class="col-8">
+                    <h1 class="text-uppercase text-center">
+                        {{ __('graph.page.header', ['shift' => $shift_id]) }}
+                    </h1>
+                </div>
+                <div class="col-2">
+                    {{--  Settings block                  --}}
+                </div>
             </div>
         </header>
         <div id="app">
@@ -29,10 +35,10 @@
         </div>
         <div class="flash">
             <p class="alert alert-success invisible" role="alert">
-                График успешно сохранен
+                {{ __('messages.graph.success') }}
             </p>
             <p class="alert alert-danger invisible" role="alert">
-                Произошла ошибка при сохранении графика
+                {{ __('messages.graph.error') }}
             </p>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>

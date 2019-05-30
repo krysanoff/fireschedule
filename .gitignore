@@ -39,6 +39,10 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
+
+# css and js bundles
 /public/js/app.js
 /public/js/app.min.js
+/public/css/app.css
+/public/css/admin.css
 /public/upload/

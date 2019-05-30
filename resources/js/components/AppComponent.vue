@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid px-5">
         <div class="row">
             <form-component :list="list"></form-component>
             <graph-component :list="list" :shift="shift"></graph-component>
