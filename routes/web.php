@@ -13,7 +13,7 @@
 Route::get('/', function () {
     return view('index');
 })->name('index');
-Route::get('/shift/{shift}', 'GraphController@getGraph')->name('graph')->where('name', '[1-4]+');
+Route::get('/shift/{shift}', 'GraphController@getLastGraph')->name('graph')->where('name', '[1-4]+');
 
 Auth::routes();
 

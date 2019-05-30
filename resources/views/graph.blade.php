@@ -24,7 +24,7 @@
             </div>
         </header>
         <div id="app">
-            <app-component v-bind:graph-list="{{ $list }}"></app-component>
+            <app-component v-bind:graph-list="{{ $lastGraph }}" v-bind:shift="{{ $shift_id }}"></app-component>
         </div>
         <div class="flash">
             <p class="alert alert-success invisible" role="alert">

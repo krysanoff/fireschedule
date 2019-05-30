@@ -28,7 +28,7 @@
 <script>
     export default {
         props: [
-          'list'
+          'list', 'shift'
         ],
         mounted() {
             this.getDutyTimes()
@@ -47,7 +47,7 @@
                     headers: headers,
                     method: 'POST',
                     body: JSON.stringify({
-                        shift_id: 1,
+                        shift_id: this.shift,
                         list: this.list
                     })
                 })

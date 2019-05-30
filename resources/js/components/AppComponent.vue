@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <form-component v-bind:list="list"></form-component>
-            <graph-component v-bind:list="list"></graph-component>
+            <form-component :list="list"></form-component>
+            <graph-component :list="list" :shift="shift"></graph-component>
         </div>
     </div>
 </template>
@@ -13,11 +13,12 @@
     export default {
         components: {FormComponent, GraphComponent},
         props: [
-            'graphList'
+            'graphList', 'shift'
         ],
         data: function () {
             return {
-                list: this.graphList
+                list: this.graphList,
+                shift: this.shift
             }
         }
     }
