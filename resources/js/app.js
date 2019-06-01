@@ -11,7 +11,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Vue from 'vue'
 import Icon from 'vue-awesome/components/Icon'
 
-import 'vue-awesome/icons' //TODO change to specific icons to reduce bundle
+import 'vue-awesome/icons/arrow-up'
+import 'vue-awesome/icons/arrow-down'
+import 'vue-awesome/icons/times'
+import 'vue-awesome/icons/plus'
 
 // Add Laravel localization data to Vue
 Vue.prototype.__ = string => _.get(window.i18n, string)
@@ -39,12 +42,4 @@ Vue.component('v-icon', Icon)
 
 const app = new Vue({
     el: '#app',
-    data: {
-
-    },
-    methods: {
-        handleClick: function () {
-            console.log('click')
-        }
-    },
 });
