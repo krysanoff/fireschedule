@@ -2,7 +2,7 @@
             <div class="col-6 card-group d-print-none">
                 <form class="form-group" id="list">
                     <div class="row">
-                        <div class="col-6 card">
+                        <div class="card">
                             <div class="card-header">
                                 <div class="card-title text-center">
                                     <h5 class="text-uppercase">{{ __('graph.drivers')}}</h5>
@@ -25,21 +25,23 @@
                                 </fieldset>
                             </div>
 
-                            <div class="card-footer row font-weight-bold">
-                                <div class="col-8 text-left text-primary">
-                                    <a class="pointer" v-on:click="up(list.drivers)">
-                                        <v-icon name="arrow-up" scale="1.5" />
-                                    </a>
-                                    <a class="pointer" v-on:click="down(list.drivers)">
-                                        <v-icon name="arrow-down" scale="1.5" />
-                                    </a>
-                                </div>
-                                <div class="col-4 text-right text-success">
-                                    <a class="pointer" v-on:click="add(list.drivers)"><v-icon name="plus" scale="1.5" /></a>
+                            <div class="card-footer font-weight-bold">
+                                <div class="row">
+                                    <div class="col-8 text-left text-primary">
+                                        <a class="pointer" v-on:click="up(list.drivers)">
+                                            <v-icon name="arrow-up" scale="1.5" />
+                                        </a>
+                                        <a class="pointer" v-on:click="down(list.drivers)">
+                                            <v-icon name="arrow-down" scale="1.5" />
+                                        </a>
+                                    </div>
+                                    <div class="col-4 text-right text-success">
+                                        <a class="pointer" v-on:click="add(list.drivers)"><v-icon name="plus" scale="1.5" /></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 card">
+                        <div class="card">
                             <div class="card-header">
                                 <div class="card-title text-center">
                                     <h5 class="text-uppercase">{{ __('graph.firefighters')}}</h5>
@@ -62,17 +64,19 @@
                                 </fieldset>
                             </div>
 
-                            <div class="card-footer row font-weight-bold">
-                                <div class="col-8 text-left text-primary">
-                                    <a class="pointer" v-on:click="up(list.firefighters)">
-                                        <v-icon name="arrow-up" scale="1.5" />
-                                    </a>
-                                    <a class="pointer" v-on:click="down(list.firefighters)">
-                                        <v-icon name="arrow-down" scale="1.5" />
-                                    </a>
-                                </div>
-                                <div class="col-4 text-right text-success">
-                                    <a class="pointer" v-on:click="add(list.firefighters)"><v-icon name="plus" scale="1.5" /></a>
+                            <div class="card-footer font-weight-bold">
+                                <div class="row">
+                                    <div class="col-8 text-left text-primary">
+                                        <a class="pointer" v-on:click="up(list.firefighters)">
+                                            <v-icon name="arrow-up" scale="1.5" />
+                                        </a>
+                                        <a class="pointer" v-on:click="down(list.firefighters)">
+                                            <v-icon name="arrow-down" scale="1.5" />
+                                        </a>
+                                    </div>
+                                    <div class="col-4 text-right text-success">
+                                        <a class="pointer" v-on:click="add(list.firefighters)"><v-icon name="plus" scale="1.5" /></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

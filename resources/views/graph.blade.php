@@ -15,17 +15,17 @@
 
     </head>
     <body>
-        <header class="navbar navbar-expand d-print-none">
+        <header class="navbar navbar-expand bg-dark text-light shadow d-print-none mb-5">
             <div class="container-fluid">
-                <div class="col-2">
-                    <a href="{{ route('index') }}" class="nav-link text-dark">{{ config('app.name') }}</a>
+                <div class="col-3">
+                    <a href="{{ route('index') }}" class="nav-link text-light">{{ config('app.name') }}</a>
                 </div>
-                <div class="col-8">
-                    <h1 class="text-uppercase text-center">
+                <div class="col-6">
+                    <h2 class="text-uppercase text-center">
                         {{ __('graph.page.header', ['shift' => $shift_id]) }}
-                    </h1>
+                    </h2>
                 </div>
-                <div class="col-2">
+                <div class="col-3">
                     {{--  Settings block                  --}}
                 </div>
             </div>

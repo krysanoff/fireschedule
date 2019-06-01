@@ -1,6 +1,6 @@
 <template>
             <div class="col-md-6">
-                <div class="row mw-100 mb-2 text-center text-uppercase">
+                <div class="row mw-100 mb-2 text-center text-uppercase d-none d-print-block">
                     <div class="col">
                         <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
                         <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
