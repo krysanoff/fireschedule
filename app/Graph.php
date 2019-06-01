@@ -30,10 +30,10 @@ class Graph extends Model
             $list->drivers = [$person];
             $list->firefighters = [$person];
             $list->duties = new \stdClass();
+            $list->duties->shift_boss = '';
             $list->duties->duty_boss = '';
             $list->duties->duty_man = '';
             $list->duties->facade = '';
-            $list->duties->shift_boss = '';
 
             $list = json_encode($list);
         } else {

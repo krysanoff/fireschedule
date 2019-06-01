@@ -26,6 +26,9 @@ package-lock.json
 # production
 /build
 
+# deployment
+/ansible
+
 # misc
 .DS_Store
 .env.local
