@@ -1,53 +1,41 @@
 <template>
-            <div class="col-md-6">
-                <div class="row mw-100 mb-2 text-center text-uppercase d-none d-print-block">
-                    <div class="col">
-                        <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
-                        <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
-                    </div>
-                </div>
-                <table class="table table-sm table-striped">
-                    <thead>
-                        <!--<tr class="text-center">
-                            <th scope="col">{{ __('graph.name') }}</th>
-                            <th scope="col">{{ __('graph.time') }}</th>
-                        </tr>-->
-                    </thead>
-                    <tbody>
-                        <tr v-for="(driver, index) in list.drivers" :key="index">
-                            <td>{{ driver.name }}</td>
-                            <td v-for="time in timeRows.drivers[index]" v-text="time"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-sm table-striped mt-4">
-                    <thead>
-                    <!--<tr class="text-center">
-                        <th scope="col">{{ __('graph.name') }}</th>
-                        <th scope="col">{{ __('graph.time') }}</th>
-                    </tr>-->
-                    </thead>
-                    <tbody>
-                    <tr v-for="(firefighter, index) in list.firefighters" :key="index">
-                        <td>{{ firefighter.name }}</td>
-                        <td v-for="time in timeRows.firefighters[index]" v-text="time"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <ul>
-                   <li class="row list-unstyled" v-for="(name, index) in list.duties">
-                       <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
-                       <div class="col">{{ name }}</div>
-                   </li>
-                </ul>
-                <div class="row d-print-none">
-                    <div class="col text-center">
-                        <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
-                    </div>
-                </div>
+    <div class="col-md-6">
+        <div class="row mw-100 mb-2 text-center text-uppercase d-none d-print-block">
+            <div class="col">
+                <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
+                <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
             </div>
+        </div>
+        <table class="table table-sm table-striped">
+            <tbody>
+                <tr v-for="(driver, index) in list.drivers" :key="index">
+                    <td class="text-capitalize">{{ driver.name }}</td>
+                    <td v-for="time in timeRows.drivers[index]" v-text="time"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-striped mt-4">
+            <tbody>
+                <tr v-for="(firefighter, index) in list.firefighters" :key="index">
+                    <td class="text-capitalize">{{ firefighter.name }}</td>
+                    <td v-for="time in timeRows.firefighters[index]" v-text="time"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul>
+           <li class="row list-unstyled" v-for="(name, index) in list.duties">
+               <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
+               <div class="col text-capitalize">{{ name }}</div>
+           </li>
+        </ul>
+        <div class="row d-print-none">
+            <div class="col text-center">
+                <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
