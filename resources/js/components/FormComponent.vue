@@ -10,8 +10,8 @@
                             </div>
                             <div class="card-body">
                                 <fieldset>
-                                    <li v-for="(name, index) in list.drivers" class="list-unstyled input-group mb-1">
-                                        <input type="text" v-model="list.drivers[index].name" class="form-control">
+                                    <li v-for="(driver, index) in list.drivers" class="list-unstyled input-group mb-1">
+                                        <input type="text" v-model="driver.name" class="form-control">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"
@@ -49,8 +49,8 @@
                             </div>
                             <div class="card-body">
                                 <fieldset>
-                                    <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group mb-1">
-                                        <input type="text" v-model="list.firefighters[index].name" class="form-control">
+                                    <li v-for="(firefighter, index) in list.firefighters" class="list-unstyled input-group mb-1">
+                                        <input type="text" v-model="firefighter.name" class="form-control">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"

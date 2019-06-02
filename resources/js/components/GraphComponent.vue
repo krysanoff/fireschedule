@@ -14,13 +14,9 @@
                         </tr>-->
                     </thead>
                     <tbody>
-                        <tr v-for="driver, index in list.drivers" :key="index">
+                        <tr v-for="(driver, index) in list.drivers" :key="index">
                             <td>{{ driver.name }}</td>
-
-                            <td v-for="time in timeRows.drivers[index]">
-                                {{ time }}
-                            </td>
-
+                            <td v-for="time in timeRows.drivers[index]" v-text="time"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -33,11 +29,9 @@
                     </tr>-->
                     </thead>
                     <tbody>
-                    <tr v-for="firefighter, index in list.firefighters" :key="index">
+                    <tr v-for="(firefighter, index) in list.firefighters" :key="index">
                         <td>{{ firefighter.name }}</td>
-                        <td v-for="time in timeRows.firefighters[index]">
-                            {{ time }}
-                        </td>
+                        <td v-for="time in timeRows.firefighters[index]" v-text="time"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -61,13 +55,10 @@
         props: [
           'list', 'shift'
         ],
-        data: function() {
-            return {
-                timeRows: this.getDutyTimes(this.list.drivers.length, this.list.firefighters.length),
+        computed: {
+            timeRows: function () {
+                return  this.getDutyTimes(this.list.drivers.length, this.list.firefighters.length)
             }
-        },
-        beforeUpdate() {
-            //this.timeRows = this.getDutyTimes(this.list.drivers.length, this.list.firefighters.length)
         },
         methods: {
             save: function () {
@@ -168,7 +159,7 @@
                 let ffLength = firefightersLength
                 let ffEveningTime = ffAllEveningTime/ffLength
 
-                for (let i = 0; i < driversLength; i++) {
+                for (let i = 0; i < firefightersLength; i++) {
                     times.firefighters[i] = []
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + ffEveningTime)
@@ -181,7 +172,7 @@
                 let allNightTime = 8*60*60*1000
                 let nightTime = allNightTime/ffLength
 
-                for (let i = 0; i < driversLength; i++) {
+                for (let i = 0; i < firefightersLength; i++) {
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + nightTime)
                     times.firefighters[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
@@ -193,7 +184,7 @@
                 let allMorningTime = 2.5*60*60*1000
                 let morningTime = allMorningTime/ffLength
 
-                for (let i = 0; i < driversLength; i++) {
+                for (let i = 0; i < firefightersLength; i++) {
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + morningTime)
                     times.firefighters[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
