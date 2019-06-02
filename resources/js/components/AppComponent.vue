@@ -18,7 +18,6 @@
         data: function () {
             return {
                 list: this.graphList,
-                shift: this.shift
             }
         }
     }

@@ -106,17 +106,16 @@
         methods: {
             up: function (arr) {
                 const first = arr.shift()
-                console.log(first)
                 return arr.push(first)
             },
 
             down: function (arr) {
                 const last = arr.pop()
-                console.log(last)
                 return arr.unshift(last)
             },
 
             add: function (arr) {
+                this.$emit('changeList')
                 return arr.push({
                     name: '',
                     time: []
@@ -125,6 +124,7 @@
 
             remove: function (arr, index) {
                 arr.splice(index, 1)
+                this.$emit('changeList')
             }
         }
     }
