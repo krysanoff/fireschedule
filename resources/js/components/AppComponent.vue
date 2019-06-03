@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid px-5">
         <div class="row">
-            <form-component :list="list"></form-component>
+            <form-component :list="list" :employees="employees"></form-component>
             <graph-component :list="list" :shift="shift"></graph-component>
         </div>
     </div>
@@ -13,7 +13,7 @@
     export default {
         components: {FormComponent, GraphComponent},
         props: [
-            'graphList', 'shift'
+            'graphList', 'shift', 'employees'
         ],
         data: function () {
             return {
