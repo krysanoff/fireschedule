@@ -11,29 +11,38 @@
                     </div>
                     <ul class="card-body">
                         <fieldset>
-                            <li v-for="(duty, index) in duties" class="list-unstyled input-group mb-1">
-                                <input type="text"
-                                       v-if="postIndex"
-                                       v-model="duty.name"
-                                       v-on:input="inputHandler(employees, [Number(idFirefighter), Number(idSnFirefighter)])"
-                                       v-on:blur=""
-                                       class="form-control text-capitalize">
-                                <input type="text"
-                                       v-else
-                                       v-model="duty.name"
-                                       v-on:input="inputHandler(employees, [Number(idDriver)])"
-                                       v-on:blur=""
-                                       class="form-control text-capitalize">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <a class="text-danger pointer"
-                                           v-if="duties.length > 1"
-                                           v-on:click.prevent="remove(duties, index)">
-                                            <v-icon name="times" />
-                                        </a>
+                            <div v-for="(duty, index) in duties">
+                                <li class="list-unstyled input-group mb-1 position-relative">
+                                    <input type="text"
+                                           :id="'input' + postIndex + '_' + index"
+                                           v-if="postIndex"
+                                           v-model="duty.name"
+                                           v-on:input="inputHandler(employees, [Number(idFirefighter), Number(idSnFirefighter)], postIndex, index)"
+                                           v-on:blur="blurHandler(postIndex, index)"
+                                           class="form-control text-capitalize">
+                                    <input type="text"
+                                           :id="'input' + postIndex + '_' + index"
+                                           v-else
+                                           v-model="duty.name"
+                                           v-on:input="inputHandler(employees, [Number(idDriver)], postIndex, index)"
+                                           v-on:blur="blurHandler(postIndex, index)"
+                                           class="form-control text-capitalize">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <a class="text-danger pointer"
+                                               v-if="duties.length > 1"
+                                               v-on:click.prevent="remove(duties, index)">
+                                                <v-icon name="times" />
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                                <ul :id="'list' + postIndex + '_' + index" class="employeesList d-none w-100">
+                                    <li v-for="employee in filteredEmployees" @mousedown="clickHandler(duty, employee, postIndex, index)">
+                                        {{ employee.lastname }}
+                                    </li>
+                                </ul>
+                            </div>
                         </fieldset>
                     </ul>
                     <div class="card-footer font-weight-bold">
@@ -72,8 +81,9 @@
         props: [
           'list', 'employees'
         ],
-        data: () => {
+        data: function () {
             return {
+                filteredEmployees: [],
                 idDriver: process.env.MIX_ID_DRIVER,
                 idFirefighter: process.env.MIX_ID_FIREFIGHTER,
                 idSnFirefighter: process.env.MIX_ID_SN_FIREFIGHTER,
@@ -94,22 +104,36 @@
             },
 
             add: function (arr) {
-                this.$emit('changeList')
                 return arr.push({
-                    name: '',
-                    time: []
+                    name: ''
                 })
             },
 
             remove: function (arr, index) {
                 arr.splice(index, 1)
-                this.$emit('changeList')
             },
 
-            inputHandler: (employees, post) => {
+            inputHandler: function (employees, post, postIndex, loopIndex) {
                 let filteredEmployees = employees.filter(employee => post.includes(employee.post_id))
 
-                console.log(filteredEmployees)
+                this.filteredEmployees = filteredEmployees
+
+                let employeesList = document.getElementById('list' + postIndex + '_' + loopIndex)
+                console.log(filteredEmployees, employeesList, 'list' + postIndex + '_' + loopIndex)
+                if (employeesList.classList.contains('d-none')) {
+                    employeesList.classList.remove('d-none')
+                }
+            },
+
+            blurHandler: (postIndex, loopIndex) => {
+                let employeesList = document.getElementById('list' + postIndex + '_' + loopIndex)
+                employeesList.classList.add('d-none')
+
+            },
+            clickHandler: function(duty, employee, postIndex, index) {
+                let fullName = employee.lastname + ' ' + employee.firstname[0] + '.' + employee.middlename[0] + '.'
+                document.getElementById('input' + postIndex + '_' + index).value = fullName
+                duty.name = fullName
             }
         }
     }
