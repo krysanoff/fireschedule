@@ -31,7 +31,10 @@
             </div>
         </header>
         <div id="app">
-            <app-component v-bind:graph-list="{{ $lastGraph }}" v-bind:shift="{{ $shift_id }}"></app-component>
+            <app-component
+                    v-bind:graph-list="{{ $lastGraph }}"
+                    v-bind:shift="{{ $shift_id }}"
+                    v-bind:employees="{{ $employees }}"></app-component>
         </div>
         <div class="flash d-print-none">
             <p class="alert alert-success invisible" role="alert">
