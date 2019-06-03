@@ -17,14 +17,14 @@
                                            :id="'input' + postIndex + '_' + index"
                                            v-if="postIndex"
                                            v-model="duty.name"
-                                           v-on:input="inputHandler(employees, [Number(idFirefighter), Number(idSnFirefighter)], postIndex, index)"
+                                           v-on:input="inputHandler($event, employees, [Number(idFirefighter), Number(idSnFirefighter)], postIndex, index)"
                                            v-on:blur="blurHandler(postIndex, index)"
                                            class="form-control text-capitalize">
                                     <input type="text"
                                            :id="'input' + postIndex + '_' + index"
                                            v-else
                                            v-model="duty.name"
-                                           v-on:input="inputHandler(employees, [Number(idDriver)], postIndex, index)"
+                                           v-on:input="inputHandler($event, employees, [Number(idDriver)], postIndex, index)"
                                            v-on:blur="blurHandler(postIndex, index)"
                                            class="form-control text-capitalize">
                                     <div class="input-group-append">
@@ -37,11 +37,17 @@
                                         </div>
                                     </div>
                                 </li>
-                                <ul :id="'list' + postIndex + '_' + index" class="employeesList d-none w-100">
-                                    <li v-for="employee in filteredEmployees" @mousedown="clickHandler(duty, employee, postIndex, index)">
-                                        {{ employee.lastname }}
-                                    </li>
-                                </ul>
+                                <div class="position-relative">
+                                    <div :id="'list' + postIndex + '_' + index"
+                                         class="employees-list list-group position-absolute d-none w-100 border-top-0">
+                                        <a class="list-group-item list-group-item-action pointer"
+                                                v-for="employee in filteredEmployees"
+                                                @mousedown="clickHandler(duty, employee, postIndex, index)">
+                                            {{ employee.lastname }}
+                                        </a>
+                                    </div>
+                                </div>
+
                             </div>
                         </fieldset>
                     </ul>
@@ -79,7 +85,7 @@
 <script>
     export default {
         props: [
-          'list', 'employees'
+          'list', 'employees', 'shift'
         ],
         data: function () {
             return {
@@ -113,13 +119,16 @@
                 arr.splice(index, 1)
             },
 
-            inputHandler: function (employees, post, postIndex, loopIndex) {
-                let filteredEmployees = employees.filter(employee => post.includes(employee.post_id))
-
-                this.filteredEmployees = filteredEmployees
-
+            inputHandler: function (event, employees, post, postIndex, loopIndex) {
                 let employeesList = document.getElementById('list' + postIndex + '_' + loopIndex)
-                console.log(filteredEmployees, employeesList, 'list' + postIndex + '_' + loopIndex)
+
+                let filteredEmployees = employees.filter(employee => post.includes(employee.post_id))
+                let shiftEmployees = filteredEmployees.filter(employee => employee.shift_id === this.shift)
+                let otherEmployees = filteredEmployees.filter(employee => employee.shift_id !== this.shift)
+                let resultEmployees = [...shiftEmployees, ...otherEmployees].filter(employee => employee.lastname.substring(0, event.target.value.length).toLowerCase() === event.target.value.toLowerCase())
+
+                this.filteredEmployees = resultEmployees
+
                 if (employeesList.classList.contains('d-none')) {
                     employeesList.classList.remove('d-none')
                 }

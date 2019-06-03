@@ -35,3 +35,8 @@
   filter: brightness(50%);
   transition: all .5s ease;
 }
+
+.employees-list {
+  top: -.5em;
+  z-index: 1000;
+}

@@ -32,7 +32,7 @@
         </ul>
         <div class="row d-print-none">
             <div class="col text-center">
-                <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
+                <a class="btn btn-lg btn-success text-light" @click.prevent="save">{{ __('graph.print')}}</a>
             </div>
         </div>
     </div>
@@ -64,9 +64,6 @@
                     })
                 })
                     .then(response => {
-                        //window.print()
-                        console.log(response)
-
                         return response.json()
                     })
                     .then(response => {
@@ -88,7 +85,7 @@
                             this.alertSelector.classList.add('invisible')
                         }, 5000)
                     })
-                    .catch(error => console.log(error))
+                    .catch(error => console.error(error))
             },
 
             getDutyTimes: function (driversLength, firefightersLength) {
@@ -112,10 +109,10 @@
                 // drivers
                 // first half
                 let driverFirstDutyTime = 1000*60*60*2
-                //console.log(this.list.drivers)
+
                 for (let i = 0; i < driversLength; i++) {
                     times.drivers[i] = []
-                    //console.log(this.list.drivers[i])
+
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + driverFirstDutyTime)
                     times.drivers[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))

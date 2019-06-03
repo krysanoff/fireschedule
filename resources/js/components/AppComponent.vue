@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid px-5">
         <div class="row">
-            <form-component :list="list" :employees="employees"></form-component>
+            <form-component :list="list" :shift="shift" :employees="employees"></form-component>
             <graph-component :list="list" :shift="shift"></graph-component>
         </div>
     </div>
