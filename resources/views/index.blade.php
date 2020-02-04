@@ -13,7 +13,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
     </head>
-    <body class="body-backgroound">
+    <body class="body-background">
         <div class="container">
             <ul class="list-unstyled">
                 <li class="row mt-5">

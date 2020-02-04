@@ -45,9 +45,7 @@ yarn-error.log*
 /.idea
 
 # css and js bundles
-/public/js/app.js
-/public/js/app.min.js
-/public/css/app.css
-/public/css/admin.css
-/public/mix-manifest.json
-/public/upload/
+/public/js
+/public/css
+/public/images
+/public/upload
