@@ -6,12 +6,12 @@
  */
 
 import './bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
 import Vue from 'vue'
 import Icon from 'vue-awesome/components/Icon'
 
-import 'vue-awesome/icons' //TODO change to specific icons to reduce bundle
+import AppComponent from "./components/AppComponent"
+import GraphComponent from "./components/GraphComponent"
+import FormComponent from "./components/FormComponent"
 
 // Add Laravel localization data to Vue
 Vue.prototype.__ = string => _.get(window.i18n, string)
@@ -23,13 +23,10 @@ Vue.prototype.__ = string => _.get(window.i18n, string)
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-Vue.component('app-component', require('./components/AppComponent'))
-Vue.component('form-component', require('./components/FormComponent'))
-Vue.component('graph-component', require('./components/GraphComponent'))
+Vue.component('app-component', AppComponent)
+Vue.component('form-component', FormComponent)
+Vue.component('graph-component', GraphComponent)
 Vue.component('v-icon', Icon)
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,13 +35,5 @@ Vue.component('v-icon', Icon)
  */
 
 const app = new Vue({
-    el: '#app',
-    data: {
-
-    },
-    methods: {
-        handleClick: function () {
-            console.log('click')
-        }
-    },
+    el: '#app'
 });

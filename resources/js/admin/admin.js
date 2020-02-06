@@ -1,5 +1,3 @@
-import '../bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import 'croppie'
 import 'croppie/croppie.css'
 
