@@ -7,7 +7,6 @@
 
 import './bootstrap'
 import Vue from 'vue'
-import Icon from 'vue-awesome/components/Icon'
 
 import AppComponent from "./components/AppComponent"
 import GraphComponent from "./components/GraphComponent"
@@ -26,7 +25,6 @@ Vue.prototype.__ = string => _.get(window.i18n, string)
 Vue.component('app-component', AppComponent)
 Vue.component('form-component', FormComponent)
 Vue.component('graph-component', GraphComponent)
-Vue.component('v-icon', Icon)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

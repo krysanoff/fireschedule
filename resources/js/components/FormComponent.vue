@@ -17,7 +17,7 @@
                                                 <a class="text-danger pointer"
                                                    v-if="list.drivers.length > 1"
                                                    v-on:click.prevent="remove(list.drivers, index)">
-                                                    <v-icon name="times" />
+                                                    <i class="fas fa-times"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -29,14 +29,14 @@
                                 <div class="row">
                                     <div class="col-8 text-left text-primary">
                                         <a class="pointer" v-on:click="up(list.drivers)">
-                                            <v-icon name="arrow-up" scale="1.5" />
+                                            <i class="fas fa-arrow-up"></i>
                                         </a>
                                         <a class="pointer" v-on:click="down(list.drivers)">
-                                            <v-icon name="arrow-down" scale="1.5" />
+                                            <i class="fas fa-arrow-down"></i>
                                         </a>
                                     </div>
                                     <div class="col-4 text-right text-success">
-                                        <a class="pointer" v-on:click="add(list.drivers)"><v-icon name="plus" scale="1.5" /></a>
+                                        <a class="pointer" v-on:click="add(list.drivers)"><i class="fas fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                                 <a class="text-danger pointer"
                                                    v-if="list.firefighters.length > 1"
                                                    v-on:click.prevent="remove(list.firefighters, index)">
-                                                    <v-icon name="times" />
+                                                    <i class="fas fa-times"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -68,14 +68,14 @@
                                 <div class="row">
                                     <div class="col-8 text-left text-primary">
                                         <a class="pointer" v-on:click="up(list.firefighters)">
-                                            <v-icon name="arrow-up" scale="1.5" />
+                                            <i class="fas fa-arrow-up"></i>
                                         </a>
                                         <a class="pointer" v-on:click="down(list.firefighters)">
-                                            <v-icon name="arrow-down" scale="1.5" />
+                                            <i class="fas fa-arrow-down"></i>
                                         </a>
                                     </div>
                                     <div class="col-4 text-right text-success">
-                                        <a class="pointer" v-on:click="add(list.firefighters)"><v-icon name="plus" scale="1.5" /></a>
+                                        <a class="pointer" v-on:click="add(list.firefighters)"><i class="fas fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>

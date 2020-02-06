@@ -24,7 +24,6 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "croppie": "^2.6.4",
-    "vue-awesome": "^3.2.0"
+    "croppie": "^2.6.4"
   }
 }
