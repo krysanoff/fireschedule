@@ -1,6 +1,6 @@
 <template>
             <div class="col-6 card-group d-print-none">
-                <form class="form-group" id="list">
+                <form class="form-group form" id="list">
                     <div class="row">
                         <div class="card">
                             <div class="card-header">
@@ -11,13 +11,13 @@
                             <div class="card-body">
                                 <fieldset>
                                     <li v-for="(name, index) in list.drivers" class="list-unstyled input-group mb-1">
-                                        <input type="text" v-model="list.drivers[index].name" class="form-control">
+                                        <input type="text" v-model="list.drivers[index].name" class="form__input form-control">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"
                                                    v-if="list.drivers.length > 1"
                                                    v-on:click.prevent="remove(list.drivers, index)">
-                                                    <i class="fas fa-times"></i>
+                                                    <font-awesome-icon :icon="['fas', 'times']" />
                                                 </a>
                                             </div>
                                         </div>
@@ -27,16 +27,18 @@
 
                             <div class="card-footer font-weight-bold">
                                 <div class="row">
-                                    <div class="col-8 text-left text-primary">
-                                        <a class="pointer" v-on:click="up(list.drivers)">
-                                            <i class="fas fa-arrow-up"></i>
+                                    <div class="col-8 text-left">
+                                        <a class="text-primary pointer" v-on:click="up(list.drivers)">
+                                            <font-awesome-icon :icon="['fas', 'arrow-up']" size="lg"/>
                                         </a>
-                                        <a class="pointer" v-on:click="down(list.drivers)">
-                                            <i class="fas fa-arrow-down"></i>
+                                        <a class="text-primary pointer" v-on:click="down(list.drivers)">
+                                            <font-awesome-icon :icon="['fas', 'arrow-down']" size="lg"/>
                                         </a>
                                     </div>
-                                    <div class="col-4 text-right text-success">
-                                        <a class="pointer" v-on:click="add(list.drivers)"><i class="fas fa-plus"></i></a>
+                                    <div class="col-4 text-right">
+                                        <a class="text-success pointer" v-on:click="add(list.drivers)">
+                                            <font-awesome-icon :icon="['fas', 'plus']" size="lg" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -50,13 +52,13 @@
                             <div class="card-body">
                                 <fieldset>
                                     <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group mb-1">
-                                        <input type="text" v-model="list.firefighters[index].name" class="form-control">
+                                        <input type="text" v-model="list.firefighters[index].name" class="form__input form-control">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"
                                                    v-if="list.firefighters.length > 1"
                                                    v-on:click.prevent="remove(list.firefighters, index)">
-                                                    <i class="fas fa-times"></i>
+                                                    <font-awesome-icon :icon="['fas', 'times']" />
                                                 </a>
                                             </div>
                                         </div>
@@ -66,16 +68,18 @@
 
                             <div class="card-footer font-weight-bold">
                                 <div class="row">
-                                    <div class="col-8 text-left text-primary">
-                                        <a class="pointer" v-on:click="up(list.firefighters)">
-                                            <i class="fas fa-arrow-up"></i>
+                                    <div class="col-8 text-left">
+                                        <a class="text-primary pointer" v-on:click="up(list.firefighters)">
+                                            <font-awesome-icon :icon="['fas', 'arrow-up']" size="lg" />
                                         </a>
-                                        <a class="pointer" v-on:click="down(list.firefighters)">
-                                            <i class="fas fa-arrow-down"></i>
+                                        <a class="text-primary pointer" v-on:click="down(list.firefighters)">
+                                            <font-awesome-icon :icon="['fas', 'arrow-down']" size="lg" />
                                         </a>
                                     </div>
-                                    <div class="col-4 text-right text-success">
-                                        <a class="pointer" v-on:click="add(list.firefighters)"><i class="fas fa-plus"></i></a>
+                                    <div class="col-4 text-right">
+                                        <a class="text-success pointer" v-on:click="add(list.firefighters)">
+                                            <font-awesome-icon :icon="['fas', 'plus']" size="lg" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +90,7 @@
                             <li v-for="(name, index) in list.duties" class="list-unstyled form-group row">
                                 <label :for="index" class="col-4 col-form-label text-right">{{ __('graph.' + index) }}</label>
                                 <div class="col-8">
-                                    <input type="text" :id="index" v-model="list.duties[index]" class="form-control">
+                                    <input type="text" :id="index" v-model="list.duties[index]" class="form__input form-control">
                                 </div>
                             </li>
                         </fieldset>

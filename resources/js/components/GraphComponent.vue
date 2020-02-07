@@ -15,7 +15,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="driver, index in list.drivers" :key="index">
-                            <td>{{ driver.name }}</td>
+                            <td class="graph__name">{{ driver.name }}</td>
                             <td v-for="time in list.drivers[index].time">
                                 {{ time }}
                             </td>
@@ -32,7 +32,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="firefighter, index in list.firefighters" :key="index">
-                        <td>{{ firefighter.name }}</td>
+                        <td class="graph__name">{{ firefighter.name }}</td>
                         <td v-for="time in list.firefighters[index].time">
                             {{ time }}
                         </td>
@@ -43,7 +43,7 @@
                 <ul>
                    <li class="row list-unstyled" v-for="(name, index) in list.duties">
                        <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
-                       <div class="col">{{ name }}</div>
+                       <div class="graph__name col">{{ name }}</div>
                    </li>
                 </ul>
                 <div class="row d-print-none">

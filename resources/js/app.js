@@ -11,6 +11,17 @@ import Vue from 'vue'
 import AppComponent from "./components/AppComponent"
 import GraphComponent from "./components/GraphComponent"
 import FormComponent from "./components/FormComponent"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faTimes)
+library.add(faArrowUp)
+library.add(faArrowDown)
+library.add(faPlus)
 
 // Add Laravel localization data to Vue
 Vue.prototype.__ = string => _.get(window.i18n, string)
@@ -25,6 +36,7 @@ Vue.prototype.__ = string => _.get(window.i18n, string)
 Vue.component('app-component', AppComponent)
 Vue.component('form-component', FormComponent)
 Vue.component('graph-component', GraphComponent)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
