@@ -59,7 +59,7 @@
         props: [
           'list', 'shift'
         ],
-        mounted() {
+        beforeMount() {
             this.getDutyTimes()
         },
         beforeUpdate() {
