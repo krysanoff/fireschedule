@@ -1,41 +1,57 @@
 <template>
-    <div class="col-md-6">
-        <div class="row mw-100 mb-2 text-center text-uppercase d-none d-print-block">
-            <div class="col">
-                <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
-                <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
-            </div>
-        </div>
-        <table class="table table-sm table-striped">
-            <tbody>
-                <tr v-for="(driver, index) in list.drivers" :key="index">
-                    <td class="text-capitalize">{{ driver.name }}</td>
-                    <td v-for="time in timeRows.drivers[index]" v-text="time"></td>
-                </tr>
-            </tbody>
-        </table>
+            <div class="col-md-6">
+                <div class="row mw-100 mb-2 text-center text-uppercase d-none d-print-block">
+                    <div class="col">
+                        <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
+                        <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
+                    </div>
+                </div>
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <!--<tr class="text-center">
+                            <th scope="col">{{ __('graph.name') }}</th>
+                            <th scope="col">{{ __('graph.time') }}</th>
+                        </tr>-->
+                    </thead>
+                    <tbody>
+                        <tr v-for="driver, index in list.drivers" :key="index">
+                            <td class="graph__name">{{ driver.name }}</td>
+                            <td v-for="time in list.drivers[index].time">
+                                {{ time }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <table class="table table-sm table-striped mt-4">
-            <tbody>
-                <tr v-for="(firefighter, index) in list.firefighters" :key="index">
-                    <td class="text-capitalize">{{ firefighter.name }}</td>
-                    <td v-for="time in timeRows.firefighters[index]" v-text="time"></td>
-                </tr>
-            </tbody>
-        </table>
+                <table class="table table-sm table-striped mt-4">
+                    <thead>
+                    <!--<tr class="text-center">
+                        <th scope="col">{{ __('graph.name') }}</th>
+                        <th scope="col">{{ __('graph.time') }}</th>
+                    </tr>-->
+                    </thead>
+                    <tbody>
+                    <tr v-for="firefighter, index in list.firefighters" :key="index">
+                        <td class="graph__name">{{ firefighter.name }}</td>
+                        <td v-for="time in list.firefighters[index].time">
+                            {{ time }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-        <ul>
-           <li class="row list-unstyled" v-for="(name, index) in list.duties">
-               <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
-               <div class="col text-capitalize">{{ name }}</div>
-           </li>
-        </ul>
-        <div class="row d-print-none">
-            <div class="col text-center">
-                <a class="btn btn-lg btn-success text-light" @click.prevent="save">{{ __('graph.print')}}</a>
+                <ul>
+                   <li class="row list-unstyled" v-for="(name, index) in list.duties">
+                       <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
+                       <div class="graph__name col">{{ name }}</div>
+                   </li>
+                </ul>
+                <div class="row d-print-none">
+                    <div class="col text-center">
+                        <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -43,10 +59,11 @@
         props: [
           'list', 'shift'
         ],
-        computed: {
-            timeRows: function () {
-                return  this.getDutyTimes(this.list.drivers.length, this.list.firefighters.length)
-            }
+        beforeMount() {
+            this.getDutyTimes()
+        },
+        beforeUpdate() {
+            this.getDutyTimes()
         },
         methods: {
             save: function () {
@@ -64,6 +81,9 @@
                     })
                 })
                     .then(response => {
+                        //window.print()
+                        console.log(response)
+
                         return response.json()
                     })
                     .then(response => {
@@ -85,14 +105,10 @@
                             this.alertSelector.classList.add('invisible')
                         }, 5000)
                     })
-                    .catch(error => console.error(error))
+                    .catch(error => console.log(error))
             },
 
-            getDutyTimes: function (driversLength, firefightersLength) {
-                let times = {
-                    drivers: [],
-                    firefighters: []
-                }
+            getDutyTimes: function () {
                 let startDutyTime = new Date()
                 startDutyTime.setHours(8)
                 startDutyTime.setMinutes(30)
@@ -100,38 +116,37 @@
                 //const endDutyTime = new Date(startDutyTime.getTime() + 1000*60*60*24)
                 const dayTime = 1000*60*60*24;
 
-                let oneEmployeeTime = dayTime/(driversLength + firefightersLength)
+                let oneEmployeeTime = dayTime/(this.list.drivers.length + this.list.firefighters.length)
 
-                let allDriversTime = oneEmployeeTime*driversLength
+                let allDriversTime = oneEmployeeTime*this.list.drivers.length
                 let usedDriversTime = 0;
-                let allFirefightersTime = oneEmployeeTime*firefightersLength
+                let allFirefightersTime = oneEmployeeTime*this.list.firefighters.length
 
                 // drivers
                 // first half
                 let driverFirstDutyTime = 1000*60*60*2
-
-                for (let i = 0; i < driversLength; i++) {
-                    times.drivers[i] = []
-
+                console.log(this.list.drivers)
+                this.list.drivers.forEach((value, i) => {
+                    this.list.drivers[i].time = []
+                    console.log(this.list.drivers[i])
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + driverFirstDutyTime)
-                    times.drivers[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    this.list.drivers[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
                     startDutyTime.setTime(end)
                     usedDriversTime += driverFirstDutyTime
-
-                }
+                })
 
                 //second half
                 let driversRemainingTime = allDriversTime - usedDriversTime
-                let driverSecondDutyTime = driversRemainingTime/driversLength
+                let driverSecondDutyTime = driversRemainingTime/this.list.drivers.length
 
-                for (let i = 0; i < driversLength; i++) {
+                this.list.drivers.forEach((value, i) => {
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + driverSecondDutyTime)
-                    times.drivers[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    this.list.drivers[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
                     startDutyTime.setTime(end)
                     usedDriversTime += driverSecondDutyTime
-                }
+                })
 
                 // Firefighters
                 // Evening
@@ -141,43 +156,41 @@
                 eveningEnd.setSeconds(0)
 
                 let ffAllEveningTime =eveningEnd.getTime() - startDutyTime.getTime()
-                let ffLength = firefightersLength
+                let ffLength = this.list.firefighters.length
                 let ffEveningTime = ffAllEveningTime/ffLength
 
-                for (let i = 0; i < firefightersLength; i++) {
-                    times.firefighters[i] = []
+                this.list.firefighters.forEach((value, i) => {
+                    this.list.firefighters[i].time = []
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + ffEveningTime)
-                    times.firefighters[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    this.list.firefighters[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
                     startDutyTime.setTime(end)
                     usedDriversTime += ffEveningTime
-                }
+                })
 
                 // Night
                 let allNightTime = 8*60*60*1000
                 let nightTime = allNightTime/ffLength
 
-                for (let i = 0; i < firefightersLength; i++) {
+                this.list.firefighters.forEach((value, i) => {
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + nightTime)
-                    times.firefighters[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    this.list.firefighters[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
                     startDutyTime.setTime(end)
                     usedDriversTime += nightTime
-                }
+                })
 
                 // Morning
                 let allMorningTime = 2.5*60*60*1000
                 let morningTime = allMorningTime/ffLength
 
-                for (let i = 0; i < firefightersLength; i++) {
+                this.list.firefighters.forEach((value, i) => {
                     let start = new Date(startDutyTime.getTime())
                     let end = new Date(startDutyTime.getTime() + morningTime)
-                    times.firefighters[i].push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                    this.list.firefighters[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
                     startDutyTime.setTime(end)
                     usedDriversTime += morningTime
-                }
-
-                return times
+                })
             },
 
             getDate: function () {

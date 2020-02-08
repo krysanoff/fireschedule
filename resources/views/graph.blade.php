@@ -1,20 +1,6 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
 
-        <script src="/js/lang.js"></script>
-
-        <title>{{ config('app.name') }} - График дежурства</title>
-
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-    </head>
-    <body>
+@section('content')
         <header class="navbar navbar-expand bg-dark text-light shadow d-print-none mb-5">
             <div class="container-fluid">
                 <div class="col-3">
@@ -31,10 +17,7 @@
             </div>
         </header>
         <div id="app">
-            <app-component
-                    v-bind:graph-list="{{ $lastGraph }}"
-                    v-bind:shift="{{ $shift_id }}"
-                    v-bind:employees="{{ $employees }}"></app-component>
+            <app-component v-bind:graph-list="{{ $lastGraph }}" v-bind:shift="{{ $shift_id }}"></app-component>
         </div>
         <div class="flash d-print-none">
             <p class="alert alert-success invisible" role="alert">
@@ -45,5 +28,23 @@
             </p>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
-    </body>
-</html>
+@endsection
+
+@section('footer')
+    <footer class="footer bg-dark text-center">
+        <div>
+            <p class="footer__text">
+                Сервис разработан
+                <a class="footer__text footer__link" href="https://www.facebook.com/eugene.krysanov" target="_blank">
+                    Евгением Крысановым
+                </a> &#169; 2019 - {{ date('Y') }}
+            </p>
+            <p class="footer__text">
+                С предложениями и пожеланиями можете обращаться по адресу
+                <a class="footer__text footer__link" href="mailto:eugene.krysanov@gmail.com" target="_blank">
+                    eugene.krysanov@gmail.com
+                </a>
+            </p>
+        </div>
+    </footer>
+@endsection

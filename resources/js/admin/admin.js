@@ -1,6 +1,4 @@
-import '../bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'croppie/croppie.min'
+import 'croppie'
 import 'croppie/croppie.css'
 
 import Vue from 'vue'
@@ -12,6 +10,14 @@ Vue.component('app-component', require('./components/AppComponent'))
 
 const app = new Vue({
     el: '#list',
+    data: {
+
+    },
+    methods: {
+        handleClick: function () {
+            console.log('click')
+        }
+    },
 });
 
 $(document).ready(function () {
