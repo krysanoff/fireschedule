@@ -1,10 +1,16 @@
 .a-header
+    position: fixed
+    top: 0
+    right: 0
+    left: 0
     display: flex
     height: $headerHeight
     justify-content: space-between
     align-items: center
     background-color: $colorDark
     color: $colorLight
+    box-shadow: 0 .2rem .5rem 0 rgba(0, 0, 0, .75)
+    z-index: 20
 
     &__logo
         display: flex
@@ -17,7 +23,8 @@
         font-weight: 900
         text-align: center
         text-transform: uppercase
-        background-color: $colorDarkest
+        background-color: $colorDark
+        filter: brightness(75%)
 
     &__title
         margin: auto 0
