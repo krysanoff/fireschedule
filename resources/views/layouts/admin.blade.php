@@ -30,7 +30,7 @@
         @yield('content')
     </main>
 
-    @include('admin.includes.footer')
+    @include('includes.footer')
     <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>

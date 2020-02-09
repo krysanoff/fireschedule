@@ -23,6 +23,6 @@
 </head>
 <body class="@yield('body-bg')">
     @yield('content')
-    @yield('footer')
+    @include('includes.footer')
 </body>
 </html>
