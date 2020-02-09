@@ -1,0 +1,48 @@
+.a-header
+    display: flex
+    height: $headerHeight
+    justify-content: space-between
+    align-items: center
+    background-color: $colorDark
+    color: $colorLight
+
+    &__logo
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-grow: 0
+        width: $sidebarWidth
+        height: 100%
+        font-size: 1.5rem
+        font-weight: 900
+        text-align: center
+        text-transform: uppercase
+        background-color: $colorDarkest
+
+    &__title
+        margin: auto 0
+
+    &__user
+        position: relative
+        margin-right: 2rem
+        padding: .5rem
+
+
+        &:hover .a-header__user-dropdown
+            @include dropdown(40px)
+            @include transition()
+
+    //&__user-button
+
+
+    &__user-dropdown
+        position: absolute
+        right: 0
+        left: 0
+        padding-top: 1rem
+        text-align: center
+        overflow: hidden
+        background-color: $colorDark
+        @include dropdown-hide()
+        @include transition()
+

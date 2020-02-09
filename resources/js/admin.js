@@ -1,17 +1,19 @@
-import 'croppie'
-import 'croppie/croppie.css'
+/*import 'croppie'
+import 'croppie/croppie.css'*/
 
+import './bootstrap'
 import Vue from 'vue'
+import AppComponent from "./admin/components/AppComponent";
 
 // Add Laravel localization data to Vue
 Vue.prototype.__ = string => _.get(window.i18n, string)
 
-Vue.component('app-component', require('./components/AppComponent'))
+Vue.component('app-component', AppComponent)
 
 const app = new Vue({
     el: '#list',
-    data: {
-
+    components: {
+        'app-component': AppComponent
     },
     methods: {
         handleClick: function () {
@@ -20,7 +22,7 @@ const app = new Vue({
     },
 });
 
-$(document).ready(function () {
+/*$(document).ready(function () {
     let $uploadImage = $('#uploadImage')
     let $fullImage = $('#fullImage').croppie({
         enableExif: true,
@@ -65,4 +67,4 @@ $(document).ready(function () {
             $('input[name="croppedImage"]').val(resp)
         })
     })
-})
+})*/
