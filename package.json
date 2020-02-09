@@ -13,6 +13,8 @@
     "axios": "^0.18",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "bootstrap": "^4.0.0",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^5.1",
     "jquery": "^3.2",
     "laravel-mix": "^5.0",
@@ -34,13 +36,13 @@
   "pre-commit": [
     "prod"
   ],
-    "babel": {
-        "env": {
-            "production": {
-                "plugins": [
-                    "transform-remove-console"
-                ]
-            }
-        }
+  "babel": {
+    "env": {
+      "production": {
+        "plugins": [
+          "transform-remove-console"
+        ]
+      }
     }
+  }
 }

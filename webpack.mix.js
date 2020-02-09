@@ -12,7 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js').version();
-mix.js('resources/js/admin/admin.js', 'public/js').version();
+mix.js('resources/js/admin.js', 'public/js').version();
 mix.sass('resources/sass/admin/admin.sass', 'public/css').version();
 mix.sass('resources/sass/frontend/app.sass', 'public/css').version();
+
+mix.browserSync('fire.local');
 
