@@ -48,6 +48,7 @@ Auth::routes();
 // Admin routes
 Route::prefix('admin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/employees', 'AdminController@getAllEmployees')->name('admin');
     Route::get('/employee/new', 'AdminController@newEmployee')->name('newEmployee');
     Route::get('/employee/{id}', 'AdminController@getEmployee')->name('employee');
 

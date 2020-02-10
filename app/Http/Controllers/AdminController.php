@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\Post;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 class AdminController extends Controller
@@ -21,9 +23,9 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Admin page
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {
@@ -35,7 +37,7 @@ class AdminController extends Controller
      * Get page for creating a new employee
      *
      * @param FormBuilder $formBuilder
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function newEmployee(FormBuilder $formBuilder)
     {
@@ -51,7 +53,7 @@ class AdminController extends Controller
      *
      * @param $id
      * @param FormBuilder $formBuilder
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function getEmployee($id, FormBuilder $formBuilder)
     {
