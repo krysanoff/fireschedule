@@ -43,7 +43,8 @@
                 <ul>
                    <li class="row list-unstyled" v-for="(name, index) in list.duties">
                        <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
-                       <div class="graph__name col">{{ name }}</div>
+                       <div v-if="index === 'duty_man'" class="graph__name col">{{ list.firefighters[0].name }}</div>
+                       <div v-else class="graph__name col">{{ name }}</div>
                    </li>
                 </ul>
                 <div class="row d-print-none">
