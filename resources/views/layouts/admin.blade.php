@@ -22,14 +22,8 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
-
     @include('admin.includes.header')
-    @include('admin.includes.sidebar')
-
-    <main class="main">
-        @yield('content')
-    </main>
-
+    @yield('app')
     @include('includes.footer')
     <script src="{{ asset('js/admin.js') }}"></script>
 </body>

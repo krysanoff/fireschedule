@@ -1,17 +1,11 @@
 @extends('layouts.admin')
 
-@section('content')
-    <section class="content">
-        @if(Session::has('message'))
-            <p class="alert alert-success">{{ Session::get('message') }}</p>
-        @endif
+@section('app')
+    <div id="app">
+        <sidebar-component></sidebar-component>
 
-        @if(count($employees))
-            <div id="list">
-                <div class="card-header">{{ __('admin.employeesList') }}</div>
-                <app-component :employees="{{ $employees }}"></app-component>
-                <a href="{{ route('newEmployee') }}" class="btn btn-success">{{ __('admin.addEmployee') }}</a>
-            </div>
-        @endif
-    </section>
+        <main class="main">
+            <content-component></content-component>
+        </main>
+    </div>
 @endsection
