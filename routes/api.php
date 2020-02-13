@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Admin routes
+
+Route::get('/employees', 'AdminController@getEmployees')->name('admin');
+
+Route::post('/employee/save/{id?}', 'AdminController@saveEmployee')->name('saveEmployee');
+Route::delete('/employee/remove/{id}', 'AdminController@removeEmployee')->name('removeEmployee');
+Route::post('/employee/update/{id}', 'AdminController@updateEmployee')->name('updateEmployee');

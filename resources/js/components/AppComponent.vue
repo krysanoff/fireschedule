@@ -13,12 +13,12 @@
     export default {
         components: {FormComponent, GraphComponent},
         props: [
-            'graphList', 'shiftNumber'
+            'graphList', 'shift'
         ],
         data: function () {
             return {
                 list: this.graphList,
-                shift: this.shiftNumber
+                shift: this.shift
             }
         }
     }

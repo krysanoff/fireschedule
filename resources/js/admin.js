@@ -3,24 +3,31 @@ import 'croppie/croppie.css'*/
 
 import './bootstrap'
 import Vue from 'vue'
-import AppComponent from "./admin/components/AppComponent";
+import VueRouter from 'vue-router'
+import ContentComponent from "./admin/components/ContentComponent";
+import EmployeesComponent from "./admin/components/EmployeesComponent"
+import SidebarComponent from "./admin/components/SidebarComponent"
+
+Vue.component('content-component', ContentComponent)
+Vue.component('employees-component', EmployeesComponent)
+Vue.component('sidebar-component', SidebarComponent)
 
 // Add Laravel localization data to Vue
 Vue.prototype.__ = string => _.get(window.i18n, string)
 
-Vue.component('app-component', AppComponent)
+Vue.use(VueRouter)
+
+const routes = [
+    {path: '/employees', component: EmployeesComponent}
+]
+
+const router = new VueRouter({
+    routes
+})
 
 const app = new Vue({
-    el: '#list',
-    components: {
-        'app-component': AppComponent
-    },
-    methods: {
-        handleClick: function () {
-            console.log('click')
-        }
-    },
-});
+    router
+}).$mount('#app');
 
 /*$(document).ready(function () {
     let $uploadImage = $('#uploadImage')

@@ -52,7 +52,8 @@
                             <div class="card-body">
                                 <fieldset>
                                     <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group mb-1">
-                                        <input type="text" v-model="list.firefighters[index].name" class="form__input form-control">
+                                        <input v-if="index === 0" type="text" v-model="list.firefighters[index].name" class="form__input form-control">
+                                        <input v-else type="text" v-model="list.firefighters[index].name" class="form__input form-control">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"
@@ -87,10 +88,20 @@
                     </div>
                     <div class="row mt-5 card border-0">
                         <fieldset>
-                            <li v-for="(name, index) in list.duties" class="list-unstyled form-group row">
+                            <li v-for="(name, index) in list.duties" class="list-unstyled form-group row" v-if="index !== 'duty_man'">
                                 <label :for="index" class="col-4 col-form-label text-right">{{ __('graph.' + index) }}</label>
                                 <div class="col-8">
-                                    <input type="text" :id="index" v-model="list.duties[index]" class="form__input form-control">
+                                    <!--<input type="text"
+                                           :id="index"
+                                           v-model="list.firefighters[0].name"
+                                           class="form__input form-control"
+                                           v-if="index === 'duty_man'"
+                                    >-->
+                                    <input type="text"
+                                           :id="index"
+                                           v-model="list.duties[index]"
+                                           class="form__input form-control"
+                                    >
                                 </div>
                             </li>
                         </fieldset>

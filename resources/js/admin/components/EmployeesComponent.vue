@@ -30,16 +30,16 @@
 
 <script>
     export default {
-        name: "AppComponent",
-        props: ['employees'],
+        name: "EmployeesComponent",
         data: function () {
             return {
                 token: window.laravel_csrf
             }
+        },
+        beforeMount() {
+            fetch('/api/employees')
+                .then(response => response.json())
+                .then(json => console.log(json))
         }
     }
 </script>
-
-<style scoped>
-
-</style>
