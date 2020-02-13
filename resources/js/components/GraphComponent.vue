@@ -1,44 +1,28 @@
 <template>
-            <div class="col-md-6">
+            <div class="col-md-6 graph">
                 <div class="row mw-100 mb-2 text-center text-uppercase d-none d-print-block">
                     <div class="col">
                         <h5>{{ __('graph.title') }}{{ getDate() }}</h5>
                         <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
                     </div>
                 </div>
-                <table class="table table-sm table-striped">
-                    <thead>
-                        <!--<tr class="text-center">
-                            <th scope="col">{{ __('graph.name') }}</th>
-                            <th scope="col">{{ __('graph.time') }}</th>
-                        </tr>-->
-                    </thead>
-                    <tbody>
-                        <tr v-for="driver, index in list.drivers" :key="index">
-                            <td class="graph__name">{{ driver.name }}</td>
-                            <td v-for="time in list.drivers[index].time">
+                    <ul class="graph__list graph__list_drivers">
+                        <li class="graph__item" v-for="driver, index in list.drivers" :key="index">
+                            <div class="graph__name">{{ driver.name }}</div>
+                            <div class="graph__time" v-for="time in list.drivers[index].time">
                                 {{ time }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </li>
+                    </ul>
 
-                <table class="table table-sm table-striped mt-4">
-                    <thead>
-                    <!--<tr class="text-center">
-                        <th scope="col">{{ __('graph.name') }}</th>
-                        <th scope="col">{{ __('graph.time') }}</th>
-                    </tr>-->
-                    </thead>
-                    <tbody>
-                    <tr v-for="firefighter, index in list.firefighters" :key="index">
-                        <td class="graph__name">{{ firefighter.name }}</td>
-                        <td v-for="time in list.firefighters[index].time">
-                            {{ time }}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <ul class="graph__list">
+                        <li class="graph__item" v-for="firefighter, index in list.firefighters" :key="index">
+                            <div class="graph__name">{{ firefighter.name }}</div>
+                            <div class="graph__time" v-for="time in list.firefighters[index].time">
+                                {{ time }}
+                            </div>
+                        </li>
+                    </ul>
 
                 <ul>
                    <li class="row list-unstyled" v-for="(name, index) in list.duties">
@@ -141,13 +125,15 @@
                 let driversRemainingTime = allDriversTime - usedDriversTime
                 let driverSecondDutyTime = driversRemainingTime/this.list.drivers.length
 
-                this.list.drivers.forEach((value, i) => {
-                    let start = new Date(startDutyTime.getTime())
-                    let end = new Date(startDutyTime.getTime() + driverSecondDutyTime)
-                    this.list.drivers[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
-                    startDutyTime.setTime(end)
-                    usedDriversTime += driverSecondDutyTime
-                })
+                if (driversRemainingTime > 0) {
+                    this.list.drivers.forEach((value, i) => {
+                        let start = new Date(startDutyTime.getTime())
+                        let end = new Date(startDutyTime.getTime() + driverSecondDutyTime)
+                        this.list.drivers[i].time.push(start.getHours()+':'+("00" + start.getMinutes()).slice(-2) + ' - ' + end.getHours()+':'+("00" + end.getMinutes()).slice(-2))
+                        startDutyTime.setTime(end)
+                        usedDriversTime += driverSecondDutyTime
+                    })
+                }
 
                 // Firefighters
                 // Evening

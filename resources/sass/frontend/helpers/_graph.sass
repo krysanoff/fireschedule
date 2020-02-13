@@ -1,4 +1,26 @@
 .graph
 
+    &__list
+        margin: 0
+        padding: 0
+        list-style: none
+        margin-bottom: 2rem
+
+    &__item
+        display: flex
+        line-height: 2rem
+        border-bottom: 1px solid rgba(0, 0, 0, .1)
+
+        &:first-child
+            border-top: 1px solid rgba(0, 0, 0, .1)
+
+        &:nth-child(odd)
+            background-color: rgba(0,0,0,.05)
+
     &__name
+        width: 200px
+        margin-left: .5rem
         text-transform: capitalize
+
+    &__time
+        width: 130px

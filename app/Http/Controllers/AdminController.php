@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -29,8 +29,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $employees = Employee::getAll();
-        return view('admin.index', compact('employees'));
+        return view('admin.index');
+    }
+
+    /**
+     * Get employees
+     * */
+    public function getEmployees()
+    {
+        return \App\Http\Resources\Employee::collection(Employee::all());
     }
 
     /**
