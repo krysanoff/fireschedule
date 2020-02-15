@@ -22,6 +22,9 @@
 
 </head>
 <body class="@yield('body-bg')">
+    @guest
+        <a href="{{ route('register') }}">Register</a>
+    @endguest
     @yield('content')
     @include('includes.footer')
 </body>

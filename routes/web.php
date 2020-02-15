@@ -10,13 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 // Public routes
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-Route::get('/shift/{shift}', 'GraphController@getLastGraph')->name('graph')->where('name', '[1-4]+');
-Route::post('/graph/save', 'GraphController@saveGraph');
+Route::middleware('auth')->prefix('')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
+    Route::get('/shift/{shift}', 'GraphController@getLastGraph')->name('graph')->where('name', '[1-4]+');
+    Route::post('/graph/save', 'GraphController@saveGraph');
+});
+
+// Admin routes
+Route::prefix('admin')->group(function () {
+    Route::middleware('auth')->get('/', 'AdminController@index')->name('admin');
+});
 
 /**
  * For passing localization data in JS
@@ -42,10 +50,3 @@ Route::get('/js/lang.js', function () {
     echo('window.i18n = ' . json_encode($strings) . ';');
     exit();
 })->name('assets.lang');
-
-Auth::routes();
-
-// Admin routes
-Route::prefix('admin')->group(function () {
-    Route::get('/', 'AdminController@index')->name('admin');
-});
