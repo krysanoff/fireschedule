@@ -10,10 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Public routes
-Route::middleware('auth')->prefix('')->group(function () {
+Route::middleware('verified')->prefix('')->group(function () {
     Route::get('/', function () {
         return view('index');
     })->name('index');
@@ -22,8 +22,8 @@ Route::middleware('auth')->prefix('')->group(function () {
 });
 
 // Admin routes
-Route::prefix('admin')->group(function () {
-    Route::middleware('auth')->get('/', 'AdminController@index')->name('admin');
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin');
 });
 
 /**
@@ -50,3 +50,7 @@ Route::get('/js/lang.js', function () {
     echo('window.i18n = ' . json_encode($strings) . ';');
     exit();
 })->name('assets.lang');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
