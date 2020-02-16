@@ -5,13 +5,16 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title text-center">
-                                    <h5 class="text-uppercase">{{ __('graph.drivers')}}</h5>
+                                    <h5 class="text-uppercase">{{ __('graph.drivers') }}</h5>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <fieldset>
                                     <li v-for="(name, index) in list.drivers" class="list-unstyled input-group mb-1">
-                                        <input type="text" v-model="list.drivers[index].name" class="form__input form-control">
+                                        <input type="text"
+                                               v-model="list.drivers[index].name"
+                                               class="form__input form-control"
+                                               :placeholder="trans.name">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"
@@ -52,8 +55,10 @@
                             <div class="card-body">
                                 <fieldset>
                                     <li v-for="(name, index) in list.firefighters" class="list-unstyled input-group mb-1">
-                                        <input v-if="index === 0" type="text" v-model="list.firefighters[index].name" class="form__input form-control">
-                                        <input v-else type="text" v-model="list.firefighters[index].name" class="form__input form-control">
+                                        <input type="text"
+                                               v-model="list.firefighters[index].name"
+                                               class="form__input form-control"
+                                               :placeholder="trans.name">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="text-danger pointer"
@@ -101,6 +106,7 @@
                                            :id="index"
                                            v-model="list.duties[index]"
                                            class="form__input form-control"
+                                           :placeholder="trans.name"
                                     >
                                 </div>
                             </li>
@@ -115,8 +121,13 @@
         props: [
           'list'
         ],
+        data: function () {
+            return {
+                trans: this.__('graph')
+            }
+        },
         mounted() {
-
+            console.log(this.__('graph'))
         },
         methods: {
             up: function (arr) {
