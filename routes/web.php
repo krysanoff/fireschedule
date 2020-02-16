@@ -14,9 +14,7 @@ Auth::routes(['verify' => true]);
 
 // Public routes
 Route::middleware('verified')->prefix('')->group(function () {
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
+    Route::get('/', 'HomeController@index')->name('index');
     Route::get('/shift/{shift}', 'GraphController@getLastGraph')->name('graph')->where('name', '[1-4]+');
     Route::post('/graph/save', 'GraphController@saveGraph');
 });
