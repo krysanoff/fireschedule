@@ -51,6 +51,7 @@
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
+                                    <img class="img-thumbnail" src="{{ asset('images/account-logout.svg') }}" alt="">
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
