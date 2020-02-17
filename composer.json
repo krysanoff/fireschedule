@@ -9,17 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "doctrine/dbal": "v2.9.2",
         "fideloper/proxy": "^4.0",
         "kris/laravel-form-builder": "^1.15",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
-        "qcod/laravel-imageup": "^1.0",
-        "doctrine/dbal": "v2.9.2"
+        "qcod/laravel-imageup": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
+        "laravel/ui": "^1.2",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.0"

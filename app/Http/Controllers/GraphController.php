@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
 use App\Graph;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class GraphController extends Controller
 {
     public function getLastGraph($shift_id) {
-        $lastGraph = Graph::getLast($shift_id);
-        $employees = Employee::getAll()->toJson();
+        $user = Auth::user();
+        $lastGraph = Graph::getLast($user->id, $shift_id);
 
-        return view('graph', compact(['lastGraph', 'shift_id', 'employees']));
+        return view('graph', compact(['lastGraph', 'shift_id']));
     }
 
     public function saveGraph(Request $request) {

@@ -6,7 +6,7 @@
                         <h6>{{ shift }} <span class="text-uppercase">{{ __('graph.shift')}}</span></h6>
                     </div>
                 </div>
-                    <ul class="graph__list graph__list_drivers">
+                    <ul v-if="list.drivers[0].name" class="graph__list graph__list_drivers">
                         <li class="graph__item" v-for="driver, index in list.drivers" :key="index">
                             <div class="graph__name">{{ driver.name }}</div>
                             <div class="graph__time" v-for="time in list.drivers[index].time">
@@ -15,7 +15,7 @@
                         </li>
                     </ul>
 
-                    <ul class="graph__list">
+                    <ul v-if="list.firefighters[0].name" class="graph__list">
                         <li class="graph__item" v-for="firefighter, index in list.firefighters" :key="index">
                             <div class="graph__name">{{ firefighter.name }}</div>
                             <div class="graph__time" v-for="time in list.firefighters[index].time">
@@ -25,13 +25,18 @@
                     </ul>
 
                 <ul>
-                   <li class="row list-unstyled" v-for="(name, index) in list.duties">
+                   <li v-if="name && index !== 'duty_man'" class="row list-unstyled" v-for="(name, index) in list.duties">
                        <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.' + index) }}</div>
-                       <div v-if="index === 'duty_man'" class="graph__name col">{{ list.firefighters[0].name }}</div>
-                       <div v-else class="graph__name col">{{ name }}</div>
+                       <div class="graph__name col">{{ name }}</div>
+                   </li>
+                   <li v-if="list.firefighters[0].name" class="row list-unstyled" >
+                       <div class="col mb-1 mr-1 text-nowrap text-right">{{ __('graph.duty_man') }}</div>
+                       <div class="graph__name col">{{ list.firefighters[0].name }}</div>
+                       <!--<div v-if="index === 'duty_man'" class="graph__name col">{{ list.firefighters[0].name }}</div>
+                       <div v-else class="graph__name col">{{ name }}</div>-->
                    </li>
                 </ul>
-                <div class="row d-print-none">
+                <div v-if="list.drivers[0].name || list.firefighters[0].name" class="row d-print-none">
                     <div class="col text-center">
                         <a class="btn btn-lg btn-success text-light" v-on:click.prevent="save">{{ __('graph.print')}}</a>
                     </div>
