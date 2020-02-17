@@ -81,6 +81,8 @@ return [
     */
 
     'locale' => 'ru',
+    'useAcceptLanguageHeader' => false,
+    'hideDefaultLocaleInURL' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +95,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
