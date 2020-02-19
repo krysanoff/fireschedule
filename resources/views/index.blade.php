@@ -2,7 +2,20 @@
 
 @section('body-bg', 'body-background')
 @section('content')
-    <div class="container">
+    <div id="app">
+        <home-component></home-component>
+    </div>
+    <div class="flash d-print-none">
+        <p class="alert alert-success invisible" role="alert">
+            {{ __('messages.graph.success') }}
+        </p>
+        <p class="alert alert-danger invisible" role="alert">
+            {{ __('messages.graph.error') }}
+        </p>
+    </div>
+    <script src="{{ mix('js/app.js') }}"></script>
+
+    {{--<div class="container">
         <ul class="list-unstyled">
             <li class="row mt-5">
                 <a href="{{ route('graph', ['shift' => 1]) }}" class="btn btn-lg btn-light text-dark text-uppercase">
@@ -25,5 +38,5 @@
                 </a>
             </li>
         </ul>
-    </div>
+    </div>--}}
 @endsection

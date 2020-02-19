@@ -7,8 +7,11 @@
 
 import './bootstrap'
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 import AppComponent from "./components/AppComponent"
+import HomeComponent from "./components/HomeComponent"
+import ShiftComponent from "./components/ShiftComponent"
 import GraphComponent from "./components/GraphComponent"
 import FormComponent from "./components/FormComponent"
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,6 +20,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import EmployeesComponent from "./admin/components/EmployeesComponent";
 
 library.add(faTimes)
 library.add(faArrowUp)
@@ -36,14 +40,21 @@ Vue.prototype.__ = string => _.get(window.i18n, string)
 Vue.component('app-component', AppComponent)
 Vue.component('form-component', FormComponent)
 Vue.component('graph-component', GraphComponent)
+Vue.component('home-component', HomeComponent)
+Vue.component('shift-component', ShiftComponent)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(VueRouter)
+
+const routes = [
+    {path: '/', name: 'home', component: HomeComponent},
+    {path: '/shift/:shift_number', name: 'shift', component: ShiftComponent},
+]
+
+const router = new VueRouter({
+    routes
+})
 
 const app = new Vue({
-    el: '#app'
-});
+    router
+}).$mount('#app');

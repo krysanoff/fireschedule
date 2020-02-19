@@ -18,4 +18,3 @@ mix.sass('resources/sass/frontend/app.sass', 'public/css').version();
 mix.copy('resources/images/*', 'public/images');
 
 mix.browserSync('fire.local');
-
