@@ -48,7 +48,3 @@ Route::get('/js/lang.js', function () {
     echo('window.i18n = ' . json_encode($strings) . ';');
     exit();
 })->name('assets.lang');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
